@@ -3,24 +3,18 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>L'ATELIER HOMME — Minimalist Menswear A/W '26</title>
+    <title>NOIR STUDIO® — Monochrome Tees & Longsleeves</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Syne:wght@600;700;800&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
     <script>
         tailwind.config = {
             theme: {
                 extend: {
-                    colors: {
-                        navy: '#0A192F',
-                        charcoal: '#18181B',
-                        stone: '#F5F4F0',
-                        warmgray: '#E5E4DF',
-                        accent: '#8C7A6B'
-                    },
                     fontFamily: {
-                        serif: ['"Cormorant Garamond"', 'serif'],
+                        display: ['"Syne"', 'sans-serif'],
+                        grotesk: ['"Space Grotesk"', 'sans-serif'],
                         sans: ['Inter', 'sans-serif']
                     }
                 }
@@ -29,226 +23,1031 @@
     </script>
     <style>
         body {
-            background-color: #F5F4F0;
-            color: #18181B;
+            background-color: #FFFFFF;
+            color: #000000;
             font-family: 'Inter', sans-serif;
+            overflow-x: hidden;
+        }
+        /* Marquee Animation */
+        @keyframes marquee {
+            0% { transform: translateX(0%); }
+            100% { transform: translateX(-50%); }
+        }
+        .animate-marquee {
+            display: flex;
+            width: 200%;
+            animation: marquee 22s linear infinite;
         }
         .product-card:hover .product-img {
-            transform: scale(1.04);
+            transform: scale(1.06);
         }
-        .no-scrollbar::-webkit-scrollbar {
-            display: none;
-        }
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar { width: 5px; }
+        ::-webkit-scrollbar-track { background: #f1f1f1; }
+        ::-webkit-scrollbar-thumb { background: #000; }
     </style>
 </head>
-<body class="antialiased selection:bg-charcoal selection:text-white">
+<body class="selection:bg-black selection:text-white">
 
-    <!-- Top Announcement Bar -->
-    <div class="bg-charcoal text-stone text-[11px] tracking-[0.2em] uppercase py-2.5 px-4 text-center font-medium">
-        AUTUMN / WINTER '26 CAPSULE DROP — MIỄN PHÍ VẬN CHUYỂN CHO ĐƠN HÀNG TỪ 799.000₫ | MÃ: <span class="underline font-semibold">WINTER10</span> GIẢM 10%
+    <!-- 1. TOP RUNNING TICKER BAR (GEN Z STREETWEAR VIBE) -->
+    <div class="bg-black text-white py-2 overflow-hidden border-b border-neutral-800 text-[11px] font-grotesk uppercase tracking-[0.2em]">
+        <div class="animate-marquee whitespace-nowrap">
+            <span class="mx-8">★ AUTUMN / WINTER '26 MONOCHROME DROP</span>
+            <span class="mx-8">★ CHỈ BÁN ÁO PHÔNG & ÁO DÀI TAY NAM</span>
+            <span class="mx-8">★ NHẬP MÃ: <strong>NOIR15</strong> GIẢM NGAY 15%</span>
+            <span class="mx-8">★ FREESHIP TOÀN QUỐC ĐƠN TỪ 500K</span>
+            <span class="mx-8">★ HEAVYWEIGHT COTTON 320GSM</span>
+            <span class="mx-8">★ AUTUMN / WINTER '26 MONOCHROME DROP</span>
+            <span class="mx-8">★ CHỈ BÁN ÁO PHÔNG & ÁO DÀI TAY NAM</span>
+            <span class="mx-8">★ NHẬP MÃ: <strong>NOIR15</strong> GIẢM NGAY 15%</span>
+            <span class="mx-8">★ FREESHIP TOÀN QUỐC ĐƠN TỪ 500K</span>
+            <span class="mx-8">★ HEAVYWEIGHT COTTON 320GSM</span>
+        </div>
     </div>
 
-    <!-- Header / Navigation -->
-    <header class="sticky top-0 z-40 bg-[#F5F4F0]/95 backdrop-blur-md border-b border-black/10">
-        <div class="max-w-7xl mx-auto px-4 sm:px-8 h-20 flex items-center justify-between">
-            <!-- Left Nav -->
-            <nav class="hidden md:flex items-center space-x-8 text-xs uppercase tracking-[0.18em] font-medium">
-                <a href="#collection" onclick="filterCategory('all')" class="hover:text-accent transition">Tất cả</a>
-                <a href="#collection" onclick="filterCategory('tee')" class="hover:text-accent transition">Áo Phông</a>
-                <a href="#collection" onclick="filterCategory('longsleeve')" class="hover:text-accent transition">Áo Dài Tay</a>
-                <a href="#collection" onclick="filterCategory('sweater')" class="hover:text-accent transition">Sweater & Len</a>
+    <!-- 2. MAIN NAVIGATION TOOLBAR (ALL FUNCTIONAL) -->
+    <header class="sticky top-0 z-40 bg-white/95 backdrop-blur-md border-b border-black">
+        <div class="max-w-[1440px] mx-auto px-4 sm:px-8 h-20 flex items-center justify-between">
+            
+            <!-- Left Navigation Categories -->
+            <nav class="hidden lg:flex items-center space-x-8 text-xs font-grotesk uppercase tracking-[0.15em] font-semibold">
+                <button onclick="setCategory('all')" id="nav-all" class="nav-link border-b-2 border-black pb-1">Tất cả (8)</button>
+                <button onclick="setCategory('tee')" id="nav-tee" class="nav-link text-neutral-500 hover:text-black pb-1 transition">Áo Phông (Tees)</button>
+                <button onclick="setCategory('longsleeve')" id="nav-longsleeve" class="nav-link text-neutral-500 hover:text-black pb-1 transition">Áo Dài Tay (Longsleeves)</button>
+                <button onclick="openModal('size-modal')" class="text-neutral-500 hover:text-black pb-1 transition">Bảng Size</button>
             </nav>
 
+            <!-- Mobile Menu Button -->
+            <button onclick="toggleMobileMenu()" class="lg:hidden p-2 border border-black">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="square" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg>
+            </button>
+
             <!-- Center Brand Logo -->
-            <a href="#" class="text-center group">
-                <h1 class="font-serif text-2xl sm:text-3xl tracking-[0.22em] font-semibold uppercase text-charcoal">L'ATELIER HOMME</h1>
-                <p class="text-[9px] tracking-[0.35em] uppercase text-neutral-500 -mt-1">Minimalist Menswear</p>
+            <a href="#" class="text-center">
+                <span class="font-display text-2xl sm:text-3xl font-extrabold tracking-[0.18em] uppercase">NOIR STUDIO®</span>
+                <span class="block text-[9px] font-grotesk tracking-[0.35em] uppercase text-neutral-500 -mt-1">Est. 2026 • Menswear</span>
             </a>
 
-            <!-- Right Actions -->
-            <div class="flex items-center space-x-6">
-                <button onclick="openSizeGuide()" class="text-xs uppercase tracking-[0.15em] font-medium hover:text-accent transition hidden sm:inline-block">
-                    Bảng Size
+            <!-- Right Functional Toolbar Icons -->
+            <div class="flex items-center space-x-3 sm:space-x-5">
+                
+                <!-- Search Button -->
+                <button onclick="toggleSearchBar()" class="flex items-center space-x-1.5 text-xs font-grotesk uppercase tracking-wider hover:opacity-60 transition p-1.5" title="Tìm kiếm">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="square" stroke-width="1.8" d="M21 21l-4.35-4.35M17 11A6 6 0 115 11a6 6 0 0112 0z"/></svg>
+                    <span class="hidden md:inline font-medium">Tìm kiếm</span>
                 </button>
-                <button onclick="toggleCart()" class="relative flex items-center space-x-2 text-xs uppercase tracking-[0.15em] font-medium hover:text-accent transition">
-                    <span>Giỏ hàng</span>
-                    <span id="cart-count" class="w-5 h-5 rounded-full bg-charcoal text-white text-[10px] flex items-center justify-center">0</span>
+
+                <!-- User / Login Button -->
+                <button onclick="handleUserClick()" id="user-toolbar-btn" class="flex items-center space-x-1.5 text-xs font-grotesk uppercase tracking-wider hover:opacity-60 transition p-1.5" title="Tài khoản">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="square" stroke-width="1.8" d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2M12 11a4 4 0 100-8 4 4 0 000 8z"/></svg>
+                    <span id="user-status-text" class="hidden md:inline font-medium">Đăng nhập</span>
+                </button>
+
+                <!-- Wishlist (Yêu thích) Button -->
+                <button onclick="toggleDrawer('wishlist-drawer')" class="relative flex items-center space-x-1 text-xs font-grotesk uppercase tracking-wider hover:opacity-60 transition p-1.5" title="Sản phẩm yêu thích">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="square" stroke-width="1.8" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"/></svg>
+                    <span id="wishlist-count" class="w-4 h-4 bg-black text-white text-[10px] font-bold flex items-center justify-center rounded-full">0</span>
+                </button>
+
+                <!-- Cart (Giỏ hàng) Button -->
+                <button onclick="toggleDrawer('cart-drawer')" class="flex items-center space-x-2 bg-black text-white px-3.5 py-2 text-xs font-grotesk uppercase tracking-wider hover:bg-neutral-800 transition">
+                    <span>Giỏ</span>
+                    <span id="cart-count" class="bg-white text-black px-1.5 py-0.2 text-[10px] font-bold">0</span>
                 </button>
             </div>
+        </div>
+
+        <!-- Expandable Live Search Bar -->
+        <div id="search-bar-panel" class="hidden border-t border-black bg-neutral-50 px-4 sm:px-8 py-5">
+            <div class="max-w-4xl mx-auto">
+                <div class="relative flex items-center border-b-2 border-black pb-2">
+                    <svg class="w-5 h-5 mr-3 text-neutral-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="square" stroke-width="2" d="M21 21l-4.35-4.35M17 11A6 6 0 115 11a6 6 0 0112 0z"/></svg>
+                    <input type="text" id="global-search-input" oninput="handleLiveSearch()" placeholder="Gõ tên áo bạn cần tìm (VD: Boxy Tee, Waffle, Raglan, Đen, Trắng...)" 
+                           class="w-full bg-transparent text-sm sm:text-base font-grotesk focus:outline-none">
+                    <button onclick="clearSearch()" class="text-xs uppercase tracking-widest text-neutral-500 hover:text-black ml-3">Đóng ✕</button>
+                </div>
+                <!-- Popular Tags -->
+                <div class="flex flex-wrap items-center gap-2 mt-3 text-[11px] font-grotesk">
+                    <span class="text-neutral-400 uppercase">Từ khóa hot:</span>
+                    <button onclick="quickSearch('Boxy')" class="border border-black/20 px-2.5 py-1 hover:bg-black hover:text-white transition">Boxy Tee 320gsm</button>
+                    <button onclick="quickSearch('Waffle')" class="border border-black/20 px-2.5 py-1 hover:bg-black hover:text-white transition">Áo dài tay Waffle</button>
+                    <button onclick="quickSearch('Raglan')" class="border border-black/20 px-2.5 py-1 hover:bg-black hover:text-white transition">Raglan Phối Tay</button>
+                    <button onclick="quickSearch('Wash')" class="border border-black/20 px-2.5 py-1 hover:bg-black hover:text-white transition">Washed Charcoal</button>
+                </div>
+                <!-- Instant Results Preview -->
+                <div id="search-instant-results" class="grid grid-cols-1 sm:grid-cols-3 gap-4 mt-4"></div>
+            </div>
+        </div>
+
+        <!-- Mobile Menu Dropdown -->
+        <div id="mobile-menu" class="hidden lg:hidden border-t border-black bg-white px-6 py-4 space-y-3 font-grotesk text-xs uppercase tracking-widest">
+            <button onclick="setCategory('all'); toggleMobileMenu()" class="block w-full text-left py-2 border-b border-neutral-200 font-bold">Tất cả sản phẩm</button>
+            <button onclick="setCategory('tee'); toggleMobileMenu()" class="block w-full text-left py-2 border-b border-neutral-200">Áo Phông (Heavyweight Tees)</button>
+            <button onclick="setCategory('longsleeve'); toggleMobileMenu()" class="block w-full text-left py-2 border-b border-neutral-200">Áo Dài Tay (Longsleeves)</button>
+            <button onclick="openModal('size-modal'); toggleMobileMenu()" class="block w-full text-left py-2">Bảng Size Nam</button>
         </div>
     </header>
 
-    <!-- Hero Section (Ralph Lauren / Minimal Editorial Vibe) -->
-    <section class="relative h-[78vh] min-h-[540px] w-full overflow-hidden bg-charcoal">
-        <img src="https://images.unsplash.com/photo-1617137984095-74e4e5e3613f?auto=format&fit=crop&w=1800&q=85" 
-             alt="Minimalist Menswear Autumn Winter" 
-             class="w-full h-full object-cover object-center opacity-75">
-        <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent"></div>
+    <!-- 3. HERO BANNER (PURE MONOCHROME STREETWEAR - NO SUITS!) -->
+    <section class="relative grid grid-cols-1 lg:grid-cols-12 border-b border-black min-h-[75vh]">
+        <!-- Left Text Column -->
+        <div class="lg:col-span-6 flex flex-col justify-between p-6 sm:p-12 lg:p-16 bg-white border-b lg:border-b-0 lg:border-r border-black">
+            <div class="space-y-2">
+                <span class="inline-block bg-black text-white text-[10px] font-grotesk uppercase tracking-[0.25em] px-3 py-1">
+                    01 / MONOCHROME ARCHIVE
+                </span>
+                <p class="text-xs font-grotesk uppercase tracking-widest text-neutral-500">Winter '26 Menswear Essentials</p>
+            </div>
+
+            <div class="my-10 lg:my-0 space-y-6">
+                <h1 class="font-display text-4xl sm:text-6xl xl:text-7xl font-extrabold uppercase leading-[0.95] tracking-tight">
+                    HEAVY TEES <br>& LONGSLEEVES.
+                </h1>
+                <p class="text-sm sm:text-base text-neutral-600 max-w-md font-normal leading-relaxed">
+                    Tối giản tuyệt đối trong hai sắc độ Đen & Trắng. Chất liệu Cotton 320gsm dày dặn, phom Boxy rộng vai chuẩn tỉ lệ Gen Z. Không họa tiết thừa, chỉ tập trung vào phom dáng.
+                </p>
+                <div class="flex flex-wrap gap-3 pt-2">
+                    <button onclick="setCategory('tee'); document.getElementById('shop-section').scrollIntoView()" 
+                            class="bg-black text-white px-7 py-4 text-xs font-grotesk uppercase tracking-[0.2em] font-semibold hover:bg-neutral-800 transition">
+                        Mua Áo Phông →
+                    </button>
+                    <button onclick="setCategory('longsleeve'); document.getElementById('shop-section').scrollIntoView()" 
+                            class="border border-black bg-white text-black px-7 py-4 text-xs font-grotesk uppercase tracking-[0.2em] font-semibold hover:bg-black hover:text-white transition">
+                        Mua Áo Dài Tay
+                    </button>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-3 gap-4 pt-8 border-t border-neutral-200 text-[11px] font-grotesk uppercase">
+                <div>
+                    <span class="font-bold block text-sm">320 GSM</span>
+                    <span class="text-neutral-500">100% Cotton Dày</span>
+                </div>
+                <div>
+                    <span class="font-bold block text-sm">BOXY FIT</span>
+                    <span class="text-neutral-500">Rộng vai, tôn dáng</span>
+                </div>
+                <div>
+                    <span class="font-bold block text-sm">MONOCHROME</span>
+                    <span class="text-neutral-500">Phối màu Đen / Trắng</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Right Visual Split (Pure T-Shirt & Streetwear Imagery) -->
+        <div class="lg:col-span-6 grid grid-cols-2 bg-black">
+            <div class="relative overflow-hidden border-r border-black/20 group">
+                <img src="https://images.unsplash.com/photo-1521572267360-ee0c2909d518?auto=format&fit=crop&w=1000&q=85" 
+                     alt="White Heavyweight Tee" 
+                     class="w-full h-full object-cover grayscale contrast-125 group-hover:scale-105 transition duration-700">
+                <div class="absolute bottom-4 left-4 bg-white text-black px-3 py-1 text-[10px] font-grotesk uppercase tracking-widest font-bold">
+                    01. Heavy Boxy Tee
+                </div>
+            </div>
+            <div class="relative overflow-hidden group">
+                <img src="https://images.unsplash.com/photo-1503342217505-b0a15ec3261c?auto=format&fit=crop&w=1000&q=85" 
+                     alt="Black Minimal Streetwear" 
+                     class="w-full h-full object-cover grayscale contrast-125 group-hover:scale-105 transition duration-700">
+                <div class="absolute bottom-4 left-4 bg-black text-white border border-white/30 px-3 py-1 text-[10px] font-grotesk uppercase tracking-widest font-bold">
+                    02. Winter Longsleeve
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 4. FILTER & PRODUCT CATALOG SECTION -->
+    <main id="shop-section" class="max-w-[1440px] mx-auto px-4 sm:px-8 py-16">
         
-        <div class="absolute inset-0 flex flex-col justify-end pb-16 sm:pb-24 px-6 sm:px-12 max-w-7xl mx-auto text-white">
-            <span class="text-xs uppercase tracking-[0.3em] text-stone/80 mb-3">First Capsule Collection • Thu Đông 2026</span>
-            <h2 class="font-serif text-4xl sm:text-6xl md:text-7xl font-normal tracking-wide max-w-3xl leading-[1.1] mb-6">
-                Essential Layers for the Cold Season.
-            </h2>
-            <p class="text-sm sm:text-base text-stone/85 max-w-xl font-light leading-relaxed mb-8">
-                Tập trung vào chất liệu cotton định lượng cao, phom dáng chuẩn mực và bảng màu trung tính vượt thời gian. Thiết kế tối giản dành riêng cho nam giới hiện đại.
-            </p>
-            <div class="flex flex-wrap gap-4">
-                <a href="#collection" class="bg-white text-charcoal px-8 py-4 text-xs uppercase tracking-[0.2em] font-semibold hover:bg-stone transition">
-                    Khám phá Bộ sưu tập
-                </a>
-                <button onclick="openSizeGuide()" class="border border-white/60 text-white px-7 py-4 text-xs uppercase tracking-[0.2em] hover:bg-white/10 transition">
-                    Tư vấn Chọn Size
-                </button>
-            </div>
-        </div>
-    </section>
-
-    <!-- Core Values Strip -->
-    <section class="border-b border-black/10 bg-[#ECEAE4]">
-        <div class="max-w-7xl mx-auto px-4 sm:px-8 py-6 grid grid-cols-1 md:grid-cols-3 gap-6 text-center">
-            <div>
-                <h3 class="text-xs uppercase tracking-[0.2em] font-semibold mb-1">100% Heavyweight Cotton</h3>
-                <p class="text-xs text-neutral-600">Định lượng vải dày dặn 280gsm – 450gsm, đứng phom, không bai dão.</p>
-            </div>
-            <div>
-                <h3 class="text-xs uppercase tracking-[0.2em] font-semibold mb-1">Minimalist Tailoring</h3>
-                <p class="text-xs text-neutral-600">Không logo rườm rà, đường may tỉ mỉ, dễ dàng phối layer mùa đông.</p>
-            </div>
-            <div>
-                <h3 class="text-xs uppercase tracking-[0.2em] font-semibold mb-1">Đổi trả dễ dàng 14 ngày</h3>
-                <p class="text-xs text-neutral-600">Hỗ trợ đổi size tận nơi nhanh chóng nếu mặc không vừa.</p>
-            </div>
-        </div>
-    </section>
-
-    <!-- Main Collection Section -->
-    <main id="collection" class="max-w-7xl mx-auto px-4 sm:px-8 py-16 sm:py-24">
-        <div class="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-6">
-            <div>
-                <p class="text-xs uppercase tracking-[0.25em] text-neutral-500 mb-2">Curated Menswear</p>
-                <h2 class="font-serif text-3xl sm:text-5xl text-charcoal">A/W '26 Essential Drop</h2>
-            </div>
-
-            <!-- Category Filter Pills & Sort -->
-            <div class="flex flex-wrap items-center gap-2 sm:gap-3">
-                <button onclick="filterCategory('all')" id="btn-all" class="filter-btn bg-charcoal text-white px-4 py-2.5 text-xs uppercase tracking-[0.15em] transition">
+        <!-- Filter Toolbar -->
+        <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 pb-8 border-b border-black">
+            <div class="flex flex-wrap items-center gap-2">
+                <button onclick="setCategory('all')" id="pill-all" class="cat-pill bg-black text-white border border-black px-5 py-2.5 text-xs font-grotesk uppercase tracking-widest font-semibold transition">
                     Tất cả (8)
                 </button>
-                <button onclick="filterCategory('tee')" id="btn-tee" class="filter-btn bg-transparent border border-black/20 text-charcoal px-4 py-2.5 text-xs uppercase tracking-[0.15em] hover:border-black transition">
-                    Áo Phông (3)
+                <button onclick="setCategory('tee')" id="pill-tee" class="cat-pill bg-white text-black border border-black px-5 py-2.5 text-xs font-grotesk uppercase tracking-widest font-semibold hover:bg-neutral-100 transition">
+                    Áo Phông / Tees (4)
                 </button>
-                <button onclick="filterCategory('longsleeve')" id="btn-longsleeve" class="filter-btn bg-transparent border border-black/20 text-charcoal px-4 py-2.5 text-xs uppercase tracking-[0.15em] hover:border-black transition">
-                    Áo Dài Tay (3)
-                </button>
-                <button onclick="filterCategory('sweater')" id="btn-sweater" class="filter-btn bg-transparent border border-black/20 text-charcoal px-4 py-2.5 text-xs uppercase tracking-[0.15em] hover:border-black transition">
-                    Sweater & Len (2)
+                <button onclick="setCategory('longsleeve')" id="pill-longsleeve" class="cat-pill bg-white text-black border border-black px-5 py-2.5 text-xs font-grotesk uppercase tracking-widest font-semibold hover:bg-neutral-100 transition">
+                    Áo Dài Tay / Longsleeves (4)
                 </button>
             </div>
-        </div>
 
-        <!-- Search & Sort Bar -->
-        <div class="flex flex-col sm:flex-row justify-between items-center gap-4 pb-8 mb-8 border-b border-black/10">
-            <div class="relative w-full sm:w-72">
-                <input type="text" id="search-input" oninput="renderProducts()" placeholder="Tìm áo phông, dài tay, sweater..." 
-                       class="w-full bg-white border border-black/15 px-4 py-2.5 text-xs focus:outline-none focus:border-charcoal">
-            </div>
-            <div class="flex items-center space-x-3 w-full sm:w-auto justify-end">
-                <span class="text-xs uppercase tracking-wider text-neutral-500">Sắp xếp:</span>
-                <select id="sort-select" onchange="renderProducts()" class="bg-white border border-black/15 px-3 py-2 text-xs focus:outline-none">
-                    <option value="featured">Nổi bật nhất</option>
-                    <option value="price-asc">Giá: Thấp đến Cao</option>
-                    <option value="price-desc">Giá: Cao đến Thấp</option>
+            <!-- Right Filter Controls -->
+            <div class="flex flex-wrap items-center gap-3">
+                <!-- Color Filter -->
+                <select id="color-filter" onchange="renderProducts()" class="border border-black bg-white px-3 py-2.5 text-xs font-grotesk uppercase tracking-wider focus:outline-none cursor-pointer">
+                    <option value="all">Màu: Tất cả Đen & Trắng</option>
+                    <option value="Đen">Chỉ màu Đen (Black)</option>
+                    <option value="Trắng">Chỉ màu Trắng (White)</option>
+                    <option value="Xám">Màu Xám Wash (Charcoal)</option>
+                </select>
+
+                <!-- Sort Order -->
+                <select id="sort-filter" onchange="renderProducts()" class="border border-black bg-white px-3 py-2.5 text-xs font-grotesk uppercase tracking-wider focus:outline-none cursor-pointer">
+                    <option value="default">Sắp xếp: Mới nhất</option>
+                    <option value="asc">Giá: Thấp → Cao</option>
+                    <option value="desc">Giá: Cao → Thấp</option>
                 </select>
             </div>
         </div>
 
+        <!-- Product Count & Active Search Info -->
+        <div class="flex justify-between items-center py-4 text-xs font-grotesk text-neutral-500 uppercase tracking-wider">
+            <span id="product-counter">Đang hiển thị 8 sản phẩm</span>
+            <span>Click vào ♥ để lưu sản phẩm yêu thích</span>
+        </div>
+
         <!-- Product Grid -->
-        <div id="product-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-x-6 gap-y-12">
-            <!-- Injected by JS -->
+        <div id="product-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-x-6 gap-y-12 mt-4">
+            <!-- Products Injected via JS -->
         </div>
     </main>
 
-    <!-- Editorial Lookbook Banner (Old Money / Minimal Menswear) -->
-    <section class="bg-charcoal text-stone py-20 px-4 sm:px-8">
-        <div class="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+    <!-- 5. GEN Z MONOCHROME LOOKBOOK SECTION -->
+    <section class="bg-black text-white border-t border-b border-black py-20 px-4 sm:px-8">
+        <div class="max-w-[1440px] mx-auto grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
             <div class="lg:col-span-5 space-y-6">
-                <span class="text-xs uppercase tracking-[0.3em] text-accent">The Layering Philosophy</span>
-                <h3 class="font-serif text-3xl sm:text-5xl leading-tight">
-                    Ít hơn nhưng Chất lượng hơn.
-                </h3>
-                <p class="text-sm text-stone/75 leading-relaxed font-light">
-                    Mùa đông không cần một tủ đồ quá tải. Chỉ cần một chiếc Áo thun Heavyweight trắng mặc lót bên trong, khoác ngoài là Áo dài tay Waffle hoặc Sweater nỉ French Terry dày dặn — bạn đã có một diện mạo gọn gàng, nam tính và ấm áp suốt cả ngày.
+                <span class="bg-white text-black px-3 py-1 text-[10px] font-grotesk uppercase tracking-[0.25em] font-bold">
+                    LOOKBOOK ARCHIVE '26
+                </span>
+                <h2 class="font-display text-3xl sm:text-5xl font-extrabold uppercase leading-none">
+                    BUILT FOR LAYERING.
+                </h2>
+                <p class="text-neutral-400 text-sm leading-relaxed">
+                    Mùa lạnh chỉ cần 2 lớp áo chuẩn chỉnh: Một chiếc **Boxy Tee trắng 320gsm** lộ viền cổ dày dặn bên trong, phối cùng **Áo dài tay Waffle hoặc Heavy Jersey đen** bên ngoài. Tối giản, gọn gàng, không bao giờ lỗi mốt.
                 </p>
-                <div class="pt-2">
-                    <button onclick="filterCategory('longsleeve'); document.getElementById('collection').scrollIntoView();" 
-                            class="border-b border-stone pb-1 text-xs uppercase tracking-[0.2em] hover:text-accent hover:border-accent transition">
-                        Xem dòng Áo Dài Tay Thu Đông →
+                <div class="pt-2 flex gap-4">
+                    <button onclick="openModal('size-modal')" class="border border-white px-6 py-3.5 text-xs font-grotesk uppercase tracking-widest hover:bg-white hover:text-black transition">
+                        Xem Bảng Size Nam
                     </button>
                 </div>
             </div>
-            <div class="lg:col-span-7 grid grid-cols-2 gap-4">
-                <img src="https://images.unsplash.com/photo-1516826957135-700dedea698c?auto=format&fit=crop&w=900&q=80" alt="Lookbook 1" class="w-full h-80 sm:h-96 object-cover">
-                <img src="https://images.unsplash.com/photo-1507679799987-c73779587ccf?auto=format&fit=crop&w=900&q=80" alt="Lookbook 2" class="w-full h-80 sm:h-96 object-cover">
+
+            <div class="lg:col-span-7 grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div class="relative aspect-[4/5] overflow-hidden border border-white/20">
+                    <img src="https://images.unsplash.com/photo-1583743814966-8936f5b7be1a?auto=format&fit=crop&w=900&q=80" class="w-full h-full object-cover grayscale contrast-125" alt="Black Tee Look">
+                    <span class="absolute bottom-3 left-3 bg-black/80 text-white text-[10px] font-grotesk px-2.5 py-1 uppercase tracking-widest">Fit 01 — All Black Heavy Tee</span>
+                </div>
+                <div class="relative aspect-[4/5] overflow-hidden border border-white/20">
+                    <img src="https://images.unsplash.com/photo-1618354691373-d851c5c3a990?auto=format&fit=crop&w=900&q=80" class="w-full h-full object-cover grayscale contrast-125" alt="Longsleeve Look">
+                    <span class="absolute bottom-3 left-3 bg-white text-black text-[10px] font-grotesk px-2.5 py-1 uppercase tracking-widest font-bold">Fit 02 — Monochrome Longsleeve</span>
+                </div>
             </div>
         </div>
     </section>
 
-    <!-- Footer -->
-    <footer class="bg-[#ECEAE4] border-t border-black/10 py-16 px-4 sm:px-8 text-xs text-neutral-600">
-        <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-10">
-            <div class="md:col-span-2 space-y-3">
-                <h4 class="font-serif text-2xl tracking-[0.2em] text-charcoal uppercase">L'ATELIER HOMME</h4>
-                <p class="max-w-sm leading-relaxed">
-                    Thương hiệu thời trang nam tối giản (Minimalist Menswear). Tập trung vào phom dáng chuẩn Á Đông và chất liệu tự nhiên bền vững cho mùa Thu Đông.
+    <!-- 6. FOOTER -->
+    <footer class="bg-white text-black py-16 px-4 sm:px-8 border-t border-black text-xs">
+        <div class="max-w-[1440px] mx-auto grid grid-cols-1 md:grid-cols-4 gap-10">
+            <div class="space-y-3">
+                <h3 class="font-display text-2xl font-extrabold tracking-widest">NOIR STUDIO®</h3>
+                <p class="text-neutral-600 leading-relaxed">
+                    Thương hiệu Áo Phông & Áo Dài Tay Nam theo trường phái tối giản Đen Trắng (Monochrome Minimalist Streetwear).
                 </p>
-                <p class="pt-2 text-neutral-500">Hà Nội, Việt Nam • Hotline: 0987.654.321</p>
+                <p class="text-neutral-400 font-grotesk">HANOI, VIETNAM • EST. 2026</p>
             </div>
-            <div class="space-y-2.5">
-                <h5 class="uppercase tracking-[0.18em] text-charcoal font-semibold mb-3">Danh mục</h5>
-                <p><a href="#collection" onclick="filterCategory('tee')" class="hover:underline">Áo Phông Heavyweight</a></p>
-                <p><a href="#collection" onclick="filterCategory('longsleeve')" class="hover:underline">Áo Dài Tay Thu Đông</a></p>
-                <p><a href="#collection" onclick="filterCategory('sweater')" class="hover:underline">Sweater & Áo Len</a></p>
-                <p><button onclick="openSizeGuide()" class="hover:underline">Bảng quy đổi kích cỡ</button></p>
+            <div class="space-y-2 font-grotesk uppercase tracking-wider">
+                <h4 class="font-bold mb-3">Sản phẩm</h4>
+                <p><button onclick="setCategory('tee')" class="hover:underline">Áo Phông Boxy 320gsm</button></p>
+                <p><button onclick="setCategory('longsleeve')" class="hover:underline">Áo Dài Tay Thu Đông</button></p>
+                <p><button onclick="openModal('size-modal')" class="hover:underline">Bảng tính Size Nam</button></p>
             </div>
-            <div class="space-y-2.5">
-                <h5 class="uppercase tracking-[0.18em] text-charcoal font-semibold mb-3">Chính sách khách hàng</h5>
-                <p>Đổi size miễn phí trong 14 ngày</p>
-                <p>Kiểm tra hàng trước khi thanh toán (COD)</p>
-                <p>Ưu đãi 10% cho đơn đầu tiên: <strong>WINTER10</strong></p>
+            <div class="space-y-2 font-grotesk uppercase tracking-wider">
+                <h4 class="font-bold mb-3">Tiện ích</h4>
+                <p><button onclick="handleUserClick()" class="hover:underline">Đăng nhập / Đăng ký</button></p>
+                <p><button onclick="toggleDrawer('wishlist-drawer')" class="hover:underline">Danh sách Yêu thích (Wishlist)</button></p>
+                <p><button onclick="toggleDrawer('cart-drawer')" class="hover:underline">Kiểm tra Giỏ hàng</button></p>
             </div>
-        </div>
-        <div class="max-w-7xl mx-auto mt-12 pt-8 border-t border-black/10 flex flex-col sm:flex-row justify-between text-[11px] text-neutral-500">
-            <p>© 2026 L'ATELIER HOMME. All rights reserved.</p>
-            <p>Designed in Minimalist Heritage Style.</p>
+            <div class="space-y-3">
+                <h4 class="font-grotesk uppercase tracking-wider font-bold">Nhận thông báo Drop mới</h4>
+                <div class="flex border border-black">
+                    <input type="email" id="newsletter-email" placeholder="Nhập email của bạn..." class="w-full px-3 py-2.5 text-xs focus:outline-none">
+                    <button onclick="subscribeNewsletter()" class="bg-black text-white px-4 text-xs font-grotesk uppercase tracking-widest font-bold">Gửi</button>
+                </div>
+                <p class="text-[11px] text-neutral-500">Giảm ngay 15% với mã <strong>NOIR15</strong> ở giỏ hàng.</p>
+            </div>
         </div>
     </footer>
 
-    <!-- Quick View Product Modal -->
-    <div id="product-modal" class="fixed inset-0 z-50 hidden bg-black/60 backdrop-blur-sm flex items-center justify-center p-4">
-        <div class="bg-[#F5F4F0] max-w-3xl w-full grid grid-cols-1 md:grid-cols-2 overflow-hidden shadow-2xl relative max-h-[90vh] overflow-y-auto">
-            <button onclick="closeProductModal()" class="absolute top-4 right-4 z-10 w-9 h-9 bg-white/90 rounded-full flex items-center justify-center text-charcoal hover:bg-charcoal hover:text-white transition">✕</button>
-            <div class="bg-neutral-200 h-80 md:h-full">
-                <img id="modal-img" src="" alt="" class="w-full h-full object-cover">
-            </div>
-            <div class="p-6 sm:p-8 flex flex-col justify-between space-y-6">
-                <div>
-                    <span id="modal-badge" class="text-[10px] uppercase tracking-[0.2em] px-2.5 py-1 bg-charcoal text-white inline-block mb-3"></span>
-                    <h3 id="modal-title" class="font-serif text-2xl sm:text-3xl text-charcoal mb-2"></h3>
-                    <p id="modal-price" class="text-lg font-medium text-charcoal mb-4"></p>
-                    <p id="modal-desc" class="text-xs text-neutral-600 leading-relaxed mb-4"></p>
-                    <div class="bg-white/70 p-3 border border-black/10 text-[11px] text-neutral-700 space-y-1 mb-6">
-                        <p><strong>Chất liệu:</strong> <span id="modal-fabric"></span></p>
-                        <p><strong>Phom dáng:</strong> <span id="modal-fit"></span></p>
-                    </div>
+    <!-- ==========================================
+         MODALS & DRAWERS (ALL 100% FUNCTIONAL)
+    =========================================== -->
 
-                    <!-- Color Selection -->
-                    <div class="mb-5">
-                        <label class="block text-[11px] uppercase tracking-wider font-semibold mb-2">Màu sắc: <span id="selected-color-label" class="font-normal"></span></label>
-                        <div id="modal-colors" class="flex space-x-2"></div>
-                    </div>
+    <!-- A. AUTH MODAL (ĐĂNG NHẬP / ĐĂNG KÝ VỚI GOOGLE, FACEBOOK, EMAIL) -->
+    <div id="auth-modal" class="fixed inset-0 z-50 hidden bg-black/70 backdrop-blur-xs flex items-center justify-center p-4">
+        <div class="bg-white border-2 border-black max-w-md w-full p-6 sm:p-8 relative shadow-2xl">
+            <button onclick="closeModal('auth-modal')" class="absolute top-4 right-4 w-8 h-8 border border-black flex items-center justify-center hover:bg-black hover:text-white transition">✕</button>
 
-                    <!-- Size Selection -->
+            <!-- Logged Out View -->
+            <div id="auth-guest-view">
+                <span class="text-[10px] font-grotesk uppercase tracking-[0.25em] bg-black text-white px-2.5 py-1">NOIR MEMBER CLUB</span>
+                <h3 id="auth-title" class="font-display text-2xl font-extrabold uppercase mt-3 mb-1">ĐĂNG NHẬP TÀI KHOẢN</h3>
+                <p class="text-xs text-neutral-500 mb-6">Lưu sản phẩm yêu thích, theo dõi đơn hàng và nhận ưu đãi thành viên.</p>
+
+                <!-- Social Login Buttons (Google & Facebook) -->
+                <div class="space-y-2.5 mb-6">
+                    <button onclick="socialLogin('Google')" class="w-full border border-black py-3 px-4 flex items-center justify-center space-x-3 text-xs font-grotesk uppercase tracking-wider font-semibold hover:bg-neutral-100 transition">
+                        <svg class="w-4 h-4" viewBox="0 0 24 24"><path fill="currentColor" d="M21.35 11.1h-9.17v2.73h6.51c-.33 3.81-3.5 5.44-6.5 5.44C8.36 19.27 5 15.25 5 12c0-3.25 3.36-7.27 7.2-7.27c3.09 0 4.9 1.97 4.9 1.97L19 4.72S16.56 2 12.1 2C6.42 2 2.03 6.8 2.03 12c0 5.05 4.13 10 10.22 10c5.35 0 9.25-3.67 9.25-9.09c0-1.15-.15-1.81-.15-1.81Z"/></svg>
+                        <span>Tiếp tục với Google</span>
+                    </button>
+                    <button onclick="socialLogin('Facebook')" class="w-full border border-black bg-[#1877F2] text-white py-3 px-4 flex items-center justify-center space-x-3 text-xs font-grotesk uppercase tracking-wider font-semibold hover:opacity-90 transition">
+                        <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24"><path d="M22 12c0-5.52-4.48-10-10-10S2 6.48 2 12c0 4.84 3.44 8.87 8 9.8V15H8v-3h2V9.5C10 7.57 11.57 6 13.5 6H16v3h-2c-.55 0-1 .45-1 1v2h3v3h-3v6.95c5.05-.5 9-4.76 9-9.95z"/></svg>
+                        <span>Tiếp tục với Facebook</span>
+                    </button>
+                </div>
+
+                <div class="relative flex py-2 items-center mb-5">
+                    <div class="flex-grow border-t border-neutral-300"></div>
+                    <span class="flex-shrink mx-3 text-[10px] font-grotesk uppercase text-neutral-400">Hoặc dùng Email</span>
+                    <div class="flex-grow border-t border-neutral-300"></div>
+                </div>
+
+                <!-- Email Form -->
+                <form onsubmit="handleEmailAuth(event)" class="space-y-3">
+                    <div id="register-name-field" class="hidden">
+                        <label class="block text-[11px] font-grotesk uppercase mb-1">Họ và tên của bạn *</label>
+                        <input type="text" id="auth-name" placeholder="VD: Nguyễn Minh Đức" class="w-full border border-black px-3.5 py-2.5 text-xs focus:outline-none">
+                    </div>
                     <div>
-                        <div class="flex justify-between items-center mb-2">
-                            <label class="text-[11px] uppercase tracking-wider font-semibold">Kích cỡ (Size Nam
+                        <label class="block text-[11px] font-grotesk uppercase mb-1">Địa chỉ Email *</label>
+                        <input type="email" id="auth-email" required placeholder="name@example.com" class="w-full border border-black px-3.5 py-2.5 text-xs focus:outline-none">
+                    </div>
+                    <div>
+                        <label class="block text-[11px] font-grotesk uppercase mb-1">Mật khẩu *</label>
+                        <input type="password" id="auth-password" required placeholder="••••••••" class="w-full border border-black px-3.5 py-2.5 text-xs focus:outline-none">
+                    </div>
+                    <button type="submit" id="auth-submit-btn" class="w-full bg-black text-white py-3.5 text-xs font-grotesk uppercase tracking-[0.2em] font-bold hover:bg-neutral-800 transition mt-2">
+                        Đăng Nhập Ngay
+                    </button>
+                </form>
+
+                <p class="text-xs text-center mt-5 text-neutral-600">
+                    <span id="auth-switch-Question">Chưa có tài khoản?</span>
+                    <button onclick="toggleAuthMode()" id="auth-switch-btn" class="font-bold underline text-black ml-1">Đăng ký thành viên mới</button>
+                </p>
+            </div>
+
+            <!-- Logged In Profile View -->
+            <div id="auth-user-view" class="hidden text-center space-y-5 py-4">
+                <div class="w-16 h-16 bg-black text-white rounded-full mx-auto flex items-center justify-center font-display text-2xl font-bold" id="profile-avatar">N</div>
+                <div>
+                    <span class="text-[10px] font-grotesk uppercase tracking-widest bg-neutral-200 px-2 py-0.5" id="profile-provider">Google Account</span>
+                    <h3 class="font-display text-2xl font-bold mt-2" id="profile-name">Khách hàng</h3>
+                    <p class="text-xs text-neutral-500" id="profile-email">user@email.com</p>
+                </div>
+                <div class="border-t border-b border-neutral-200 py-4 text-xs font-grotesk flex justify-around">
+                    <div>
+                        <span class="block font-bold text-base" id="profile-wishlist-num">0</span>
+                        <span class="text-neutral-500">Đã yêu thích</span>
+                    </div>
+                    <div>
+                        <span class="block font-bold text-base">VIP 15%</span>
+                        <span class="text-neutral-500">Hạng Monochrome</span>
+                    </div>
+                </div>
+                <button onclick="logoutUser()" class="w-full border border-black py-3 text-xs font-grotesk uppercase tracking-widest font-bold hover:bg-black hover:text-white transition">
+                    Đăng xuất tài khoản
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- B. WISHLIST DRAWER (DANH SÁCH SẢN PHẨM YÊU THÍCH) -->
+    <div id="wishlist-drawer" class="fixed inset-0 z-50 hidden">
+        <div onclick="toggleDrawer('wishlist-drawer')" class="absolute inset-0 bg-black/60 backdrop-blur-xs"></div>
+        <div class="absolute right-0 top-0 h-full w-full max-w-md bg-white border-l-2 border-black flex flex-col justify-between p-6">
+            <div class="flex items-center justify-between pb-4 border-b border-black">
+                <div>
+                    <h3 class="font-display text-xl font-extrabold uppercase tracking-wider">Mục Yêu Thích ♥</h3>
+                    <p class="text-[11px] text-neutral-500">Các mẫu áo bạn đã thả tim lưu lại</p>
+                </div>
+                <button onclick="toggleDrawer('wishlist-drawer')" class="w-8 h-8 border border-black flex items-center justify-center hover:bg-black hover:text-white">✕</button>
+            </div>
+
+            <div id="wishlist-items" class="flex-1 overflow-y-auto py-4 space-y-4">
+                <!-- Injected via JS -->
+            </div>
+
+            <div class="pt-4 border-t border-black">
+                <button onclick="toggleDrawer('wishlist-drawer')" class="w-full bg-black text-white py-3.5 text-xs font-grotesk uppercase tracking-[0.2em] font-bold">
+                    Tiếp tục xem đồ
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- C. CART DRAWER (GIỎ HÀNG & THANH TOÁN) -->
+    <div id="cart-drawer" class="fixed inset-0 z-50 hidden">
+        <div onclick="toggleDrawer('cart-drawer')" class="absolute inset-0 bg-black/60 backdrop-blur-xs"></div>
+        <div class="absolute right-0 top-0 h-full w-full max-w-md bg-white border-l-2 border-black flex flex-col justify-between p-6">
+            <div class="flex items-center justify-between pb-4 border-b border-black">
+                <h3 class="font-display text-xl font-extrabold uppercase tracking-wider">Giỏ Hàng Của Bạn</h3>
+                <button onclick="toggleDrawer('cart-drawer')" class="w-8 h-8 border border-black flex items-center justify-center hover:bg-black hover:text-white">✕</button>
+            </div>
+
+            <div id="cart-items" class="flex-1 overflow-y-auto py-4 space-y-4"></div>
+
+            <div class="pt-4 border-t border-black space-y-4">
+                <div class="flex border border-black">
+                    <input type="text" id="promo-code" placeholder="Nhập mã NOIR15 giảm 15%" class="flex-1 px-3 py-2 text-xs uppercase font-grotesk focus:outline-none">
+                    <button onclick="applyPromo()" class="bg-black text-white px-4 py-2 text-xs font-grotesk uppercase font-bold">Áp dụng</button>
+                </div>
+                <div class="space-y-1 text-xs font-grotesk">
+                    <div class="flex justify-between text-neutral-500">
+                        <span>Tạm tính:</span>
+                        <span id="cart-subtotal">0₫</span>
+                    </div>
+                    <div id="cart-discount-row" class="flex justify-between text-black font-semibold hidden">
+                        <span>Giảm giá (NOIR15 - 15%):</span>
+                        <span id="cart-discount">-0₫</span>
+                    </div>
+                    <div class="flex justify-between text-base font-bold pt-2 border-t border-neutral-200">
+                        <span>TỔNG CỘNG:</span>
+                        <span id="cart-total">0₫</span>
+                    </div>
+                </div>
+                <button onclick="handleCheckout()" class="w-full bg-black text-white py-4 text-xs font-grotesk uppercase tracking-[0.2em] font-bold hover:bg-neutral-800 transition">
+                    Thanh Toán Đơn Hàng →
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- D. PRODUCT QUICK VIEW MODAL -->
+    <div id="product-modal" class="fixed inset-0 z-50 hidden bg-black/70 backdrop-blur-xs flex items-center justify-center p-4">
+        <div class="bg-white border-2 border-black max-w-3xl w-full grid grid-cols-1 md:grid-cols-2 overflow-hidden relative max-h-[90vh] overflow-y-auto">
+            <button onclick="closeModal('product-modal')" class="absolute top-3 right-3 z-10 w-9 h-9 bg-white border border-black flex items-center justify-center hover:bg-black hover:text-white">✕</button>
+            <div class="bg-neutral-100 aspect-[3/4] md:aspect-auto">
+                <img id="modal-img" src="" class="w-full h-full object-cover grayscale contrast-125" alt="">
+            </div>
+            <div class="p-6 sm:p-8 flex flex-col justify-between space-y-5">
+                <div>
+                    <span id="modal-tag" class="bg-black text-white text-[10px] font-grotesk uppercase tracking-widest px-2.5 py-1"></span>
+                    <h3 id="modal-name" class="font-display text-2xl font-extrabold uppercase mt-3"></h3>
+                    <p id="modal-price" class="font-grotesk text-xl font-bold mt-1 mb-4"></p>
+                    <p id="modal-desc" class="text-xs text-neutral-600 leading-relaxed mb-4"></p>
+                    
+                    <div class="border-t border-b border-neutral-200 py-3 text-xs space-y-1 font-grotesk mb-5">
+                        <p><strong>Định lượng vải:</strong> <span id="modal-gsm"></span></p>
+                        <p><strong>Phom áo:</strong> Boxy / Relaxed Streetwear Nam</p>
+                    </div>
+
+                    <!-- Select Color -->
+                    <div class="mb-4">
+                        <label class="block text-[11px] font-grotesk uppercase font-bold mb-2">Màu sắc: <span id="modal-color-label" class="font-normal"></span></label>
+                        <div id="modal-colors" class="flex gap-2"></div>
+                    </div>
+
+                    <!-- Select Size -->
+                    <div>
+                        <div class="flex justify-between text-[11px] font-grotesk uppercase mb-2">
+                            <span class="font-bold">Chọn Size Nam:</span>
+                            <button onclick="openModal('size-modal')" class="underline text-neutral-500 hover:text-black">Bảng tính size</button>
+                        </div>
+                        <div id="modal-sizes" class="grid grid-cols-4 gap-2"></div>
+                    </div>
+                </div>
+
+                <div class="flex gap-2 pt-2">
+                    <button id="modal-add-cart" class="flex-1 bg-black text-white py-4 text-xs font-grotesk uppercase tracking-widest font-bold hover:bg-neutral-800 transition">
+                        Thêm vào giỏ
+                    </button>
+                    <button id="modal-wishlist-btn" class="w-12 border border-black flex items-center justify-center text-lg hover:bg-black hover:text-white transition" title="Yêu thích">
+                        ♥
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- E. SIZE GUIDE MODAL -->
+    <div id="size-modal" class="fixed inset-0 z-50 hidden bg-black/70 backdrop-blur-xs flex items-center justify-center p-4">
+        <div class="bg-white border-2 border-black max-w-lg w-full p-6 sm:p-8 relative">
+            <button onclick="closeModal('size-modal')" class="absolute top-4 right-4 w-8 h-8 border border-black flex items-center justify-center hover:bg-black hover:text-white">✕</button>
+            <h3 class="font-display text-2xl font-extrabold uppercase mb-1">BẢNG SIZE NAM (BOXY FIT)</h3>
+            <p class="text-xs text-neutral-500 mb-5">Phom áo rộng vai chuẩn Gen Z. Không cần nhích size vẫn mặc đẹp.</p>
+            <table class="w-full text-xs font-grotesk border-collapse border border-black text-center">
+                <thead class="bg-black text-white uppercase">
+                    <tr>
+                        <th class="p-2.5 border border-black">Size</th>
+                        <th class="p-2.5 border border-black">Chiều cao</th>
+                        <th class="p-2.5 border border-black">Cân nặng</th>
+                        <th class="p-2.5 border border-black">Dài áo / Rộng ngực</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr><td class="p-2.5 border border-black font-bold">S</td><td class="p-2.5 border border-black">1m60 - 1m68</td><td class="p-2.5 border border-black">50 - 60kg</td><td class="p-2.5 border border-black">68cm / 56cm</td></tr>
+                    <tr><td class="p-2.5 border border-black font-bold">M</td><td class="p-2.5 border border-black">1m68 - 1m74</td><td class="p-2.5 border border-black">60 - 68kg</td><td class="p-2.5 border border-black">70cm / 58cm</td></tr>
+                    <tr><td class="p-2.5 border border-black font-bold">L</td><td class="p-2.5 border border-black">1m74 - 1m80</td><td class="p-2.5 border border-black">68 - 78kg</td><td class="p-2.5 border border-black">72cm / 60cm</td></tr>
+                    <tr><td class="p-2.5 border border-black font-bold">XL</td><td class="p-2.5 border border-black">1m78 - 1m88</td><td class="p-2.5 border border-black">78 - 90kg</td><td class="p-2.5 border border-black">74cm / 63cm</td></tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <!-- Toast Notification -->
+    <div id="toast" class="fixed bottom-5 right-5 z-50 hidden bg-black text-white border border-white px-5 py-3 text-xs font-grotesk uppercase tracking-wider shadow-xl"></div>
+
+    <!-- ==========================================
+         JAVASCRIPT LOGIC
+    =========================================== -->
+    <script>
+        // 1. PRODUCT DATA (CHỈ ÁO PHÔNG & ÁO DÀI TAY NAM - KHÔNG VEST!)
+        const products = [
+            {
+                id: 1,
+                name: "01. Heavyweight Boxy Tee — Jet Black",
+                category: "tee",
+                price: 340000,
+                gsm: "100% Cotton Compact 320gsm (Cổ bo dày 3cm)",
+                colors: ["Đen", "Trắng"],
+                tag: "BEST SELLER",
+                image: "https://images.unsplash.com/photo-1583743814966-8936f5b7be1a?auto=format&fit=crop&w=900&q=80",
+                desc: "Áo phông trơn phom Boxy vuông vức, vai trễ nhẹ chuẩn vibe streetwear. Chất vải 320gsm cực dày, không lộ ngực, giặt máy không bai cổ."
+            },
+            {
+                id: 2,
+                name: "02. Pure White Architectural Tee",
+                category: "tee",
+                price: 340000,
+                gsm: "100% Cotton 320gsm chống nhăn",
+                colors: ["Trắng", "Đen"],
+                tag: "ESSENTIAL",
+                image: "https://images.unsplash.com/photo-1521572267360-ee0c2909d518?auto=format&fit=crop&w=900&q=80",
+                desc: "Chiếc áo phông trắng hoàn hảo để mặc độc lập hoặc mặc lót (layer) bên trong áo dài tay mùa đông."
+            },
+            {
+                id: 3,
+                name: "03. Waffle Thermal Longsleeve — Black",
+                category: "longsleeve",
+                price: 450000,
+                gsm: "Vải dệt tổ ong (Heavy Waffle) 350gsm giữ nhiệt",
+                colors: ["Đen", "Trắng", "Xám"],
+                tag: "WINTER DROP",
+                image: "https://images.unsplash.com/photo-1618354691373-d851c5c3a990?auto=format&fit=crop&w=900&q=80",
+                desc: "Áo dài tay dệt vân tổ ong nổi khối cực kỳ nam tính. Bo cổ tay chắc chắn, giữ ấm hoàn hảo cho thời tiết thu đông Hà Nội."
+            },
+            {
+                id: 4,
+                name: "04. Monochrome Raglan Longsleeve",
+                category: "longsleeve",
+                price: 420000,
+                gsm: "Cotton Jersey 290gsm mềm mịn",
+                colors: ["Trắng Phối Đen", "Đen Phối Trắng"],
+                tag: "GEN Z PICK",
+                image: "https://images.unsplash.com/photo-1503342217505-b0a15ec3261c?auto=format&fit=crop&w=900&q=80",
+                desc: "Thiết kế áo dài tay phối tay Raglan tương phản Đen - Trắng cực cuốn. Phom rộng thoải mái, dễ phối cùng quần túi hộp hoặc quần jeans ống suông."
+            },
+            {
+                id: 5,
+                name: "05. Washed Charcoal Vintage Tee",
+                category: "tee",
+                price: 370000,
+                gsm: "Cotton Acid-Wash 310gsm bụi bặm",
+                colors: ["Xám", "Đen"],
+                tag: "ARCHIVE",
+                image: "https://images.unsplash.com/photo-1562157873-818bc0726f68?auto=format&fit=crop&w=900&q=80",
+                desc: "Áo phông xử lý hiệu ứng bạc màu Washed Charcoal mang đậm hơi thở vintage streetwear."
+            },
+            {
+                id: 6,
+                name: "06. Heavy Ribbed Cuff Longsleeve — White",
+                category: "longsleeve",
+                price: 430000,
+                gsm: "100% Organic Cotton 300gsm",
+                colors: ["Trắng", "Đen"],
+                tag: "NEW ARRIVAL",
+                image: "https://images.unsplash.com/photo-1489987707025-afc232f7ea0f?auto=format&fit=crop&w=900&q=80",
+                desc: "Áo thun dài tay trắng tinh khôi với phần bo gân cổ tay dày dặn, xắn tay áo cực gọn và ngầu."
+            },
+            {
+                id: 7,
+                name: "07. Mock-Neck High Collar Tee",
+                category: "tee",
+                price: 360000,
+                gsm: "Cotton Supima 300gsm bản cổ cao 3.5cm",
+                colors: ["Đen", "Trắng"],
+                tag: "MINIMAL",
+                image: "https://images.unsplash.com/photo-1576566588028-4147f3842f27?auto=format&fit=crop&w=900&q=80",
+                desc: "Áo phông cổ cao 3.5 phân ôm nhẹ phần cổ, tạo điểm nhấn sang trọng khác biệt so với áo cổ tròn thông thường."
+            },
+            {
+                id: 8,
+                name: "08. Double-Layer Stacked Longsleeve",
+                category: "longsleeve",
+                price: 490000,
+                gsm: "Cotton 330gsm may giả 2 lớp ở gấu áo & cổ tay",
+                colors: ["Đen", "Xám"],
+                tag: "LIMITED",
+                image: "https://images.unsplash.com/photo-1556821840-3a63f95609a7?auto=format&fit=crop&w=900&q=80",
+                desc: "Thiết kế áo dài tay có viền trắng lộ nhẹ ở cổ và gấu áo tạo hiệu ứng mặc layer 2 lớp sẵn mà không bị nóng bí."
+            }
+        ];
+
+        // 2. STATE (SAVED TO LOCALSTORAGE)
+        let currentCategory = 'all';
+        let searchQuery = '';
+        let wishlist = JSON.parse(localStorage.getItem('noir_wishlist') || '[]');
+        let cart = JSON.parse(localStorage.getItem('noir_cart') || '[]');
+        let currentUser = JSON.parse(localStorage.getItem('noir_user') || 'null');
+        let isRegisterMode = false;
+        let promoApplied = false;
+
+        let activeModalProduct = null;
+        let selectedColor = '';
+        let selectedSize = 'L';
+
+        function formatPrice(num) {
+            return num.toLocaleString('vi-VN') + '₫';
+        }
+
+        function showToast(msg) {
+            const t = document.getElementById('toast');
+            t.innerText = msg;
+            t.classList.remove('hidden');
+            setTimeout(() => t.classList.add('hidden'), 2600);
+        }
+
+        // 3. RENDER PRODUCTS & WISHLIST HEARTS
+        function renderProducts() {
+            const colorFilter = document.getElementById('color-filter').value;
+            const sortFilter = document.getElementById('sort-filter').value;
+
+            let list = products.filter(p => {
+                const matchCat = currentCategory === 'all' || p.category === currentCategory;
+                const matchColor = colorFilter === 'all' || p.colors.some(c => c.includes(colorFilter));
+                const matchSearch = p.name.toLowerCase().includes(searchQuery.toLowerCase()) || p.desc.toLowerCase().includes(searchQuery.toLowerCase());
+                return matchCat && matchColor && matchSearch;
+            });
+
+            if (sortFilter === 'asc') list.sort((a, b) => a.price - b.price);
+            if (sortFilter === 'desc') list.sort((a, b) => b.price - a.price);
+
+            document.getElementById('product-counter').innerText = `Đang hiển thị ${list.length} sản phẩm`;
+
+            const grid = document.getElementById('product-grid');
+            grid.innerHTML = list.map(p => {
+                const isLiked = wishlist.includes(p.id);
+                return `
+                <div class="product-card group border border-black bg-white flex flex-col justify-between relative">
+                    <div>
+                        <div class="relative aspect-[3/4] overflow-hidden bg-neutral-100 border-b border-black">
+                            <img src="${p.image}" alt="${p.name}" onclick="openProductDetail(${p.id})"
+                                 class="product-img w-full h-full object-cover grayscale contrast-125 cursor-pointer transition duration-500">
+                            
+                            <span class="absolute top-3 left-3 bg-black text-white text-[10px] font-grotesk uppercase tracking-widest px-2.5 py-1">
+                                ${p.tag}
+                            </span>
+
+                            <!-- Heart / Wishlist Button -->
+                            <button onclick="toggleWishlist(${p.id})" 
+                                    class="absolute top-3 right-3 w-9 h-9 border border-black flex items-center justify-center transition ${isLiked ? 'bg-black text-white' : 'bg-white text-black hover:bg-black hover:text-white'}"
+                                    title="Yêu thích">
+                                ♥
+                            </button>
+
+                            <!-- Quick Add Overlay -->
+                            <button onclick="openProductDetail(${p.id})" 
+                                    class="absolute inset-x-0 bottom-0 bg-black/90 text-white py-3 text-[11px] font-grotesk uppercase tracking-[0.2em] font-bold translate-y-full group-hover:translate-y-0 transition duration-300">
+                                + Chọn Size & Mua Nhanh
+                            </button>
+                        </div>
+
+                        <div class="p-4" onclick="openProductDetail(${p.id})">
+                            <p class="text-[10px] font-grotesk uppercase tracking-widest text-neutral-500 mb-1">
+                                ${p.category === 'tee' ? 'HEAVYWEIGHT TEE' : 'WINTER LONGSLEEVE'}
+                            </p>
+                            <h3 class="font-grotesk text-sm font-bold uppercase cursor-pointer group-hover:underline">${p.name}</h3>
+                        </div>
+                    </div>
+
+                    <div class="px-4 pb-4 flex items-center justify-between border-t border-neutral-100 pt-2">
+                        <span class="font-grotesk font-bold text-sm">${formatPrice(p.price)}</span>
+                        <span class="text-[11px] font-grotesk text-neutral-500">${p.colors.join(' / ')}</span>
+                    </div>
+                </div>
+            `}).join('');
+        }
+
+        function setCategory(cat) {
+            currentCategory = cat;
+            document.querySelectorAll('.cat-pill').forEach(btn => {
+                btn.className = 'cat-pill bg-white text-black border border-black px-5 py-2.5 text-xs font-grotesk uppercase tracking-widest font-semibold hover:bg-neutral-100 transition';
+            });
+            const activePill = document.getElementById('pill-' + cat);
+            if (activePill) {
+                activePill.className = 'cat-pill bg-black text-white border border-black px-5 py-2.5 text-xs font-grotesk uppercase tracking-widest font-semibold transition';
+            }
+            renderProducts();
+        }
+
+        // 4. WISHLIST SYSTEM (YÊU THÍCH)
+        function toggleWishlist(id) {
+            const idx = wishlist.indexOf(id);
+            const item = products.find(p => p.id === id);
+            if (idx > -1) {
+                wishlist.splice(idx, 1);
+                showToast(`Đã bỏ "${item.name}" khỏi Yêu thích`);
+            } else {
+                wishlist.push(id);
+                showToast(`♥ Đã lưu "${item.name}" vào Yêu thích!`);
+            }
+            localStorage.setItem('noir_wishlist', JSON.stringify(wishlist));
+            updateWishlistUI();
+            renderProducts();
+        }
+
+        function updateWishlistUI() {
+            document.getElementById('wishlist-count').innerText = wishlist.length;
+            const profileNum = document.getElementById('profile-wishlist-num');
+            if (profileNum) profileNum.innerText = wishlist.length;
+
+            const container = document.getElementById('wishlist-items');
+            if (wishlist.length === 0) {
+                container.innerHTML = `<div class="text-center py-16 text-xs text-neutral-400 font-grotesk uppercase">Chưa có sản phẩm yêu thích nào.<br>Hãy bấm vào nút ♥ trên ảnh áo!</div>`;
+                return;
+            }
+
+            const likedProducts = products.filter(p => wishlist.includes(p.id));
+            container.innerHTML = likedProducts.map(p => `
+                <div class="flex gap-3 border border-black p-3 bg-neutral-50">
+                    <img src="${p.image}" class="w-16 h-20 object-cover grayscale contrast-125 border border-black">
+                    <div class="flex-1 text-xs font-grotesk">
+                        <h4 class="font-bold uppercase">${p.name}</h4>
+                        <p class="font-semibold mt-1">${formatPrice(p.price)}</p>
+                        <div class="flex gap-2 mt-2">
+                            <button onclick="addToCart(${p.id}, 'L', '${p.colors[0]}'); toggleDrawer('wishlist-drawer'); toggleDrawer('cart-drawer')" 
+                                    class="bg-black text-white px-3 py-1 text-[10px] uppercase tracking-wider font-bold">
+                                + Chuyển vào Giỏ
+                            </button>
+                            <button onclick="toggleWishlist(${p.id})" class="border border-black px-2 py-1 text-[10px] uppercase">Xóa</button>
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        // 5. LIVE SEARCH BAR LOGIC
+        function toggleSearchBar() {
+            const panel = document.getElementById('search-bar-panel');
+            panel.classList.toggle('hidden');
+            if (!panel.classList.contains('hidden')) {
+                document.getElementById('global-search-input').focus();
+            }
+        }
+
+        function handleLiveSearch() {
+            const val = document.getElementById('global-search-input').value.trim();
+            searchQuery = val;
+            renderProducts();
+
+            const preview = document.getElementById('search-instant-results');
+            if (!val) {
+                preview.innerHTML = '';
+                return;
+            }
+            const matches = products.filter(p => p.name.toLowerCase().includes(val.toLowerCase()) || p.desc.toLowerCase().includes(val.toLowerCase())).slice(0, 3);
+            preview.innerHTML = matches.map(p => `
+                <div onclick="openProductDetail(${p.id})" class="flex items-center gap-3 border border-black bg-white p-2.5 cursor-pointer hover:bg-neutral-100">
+                    <img src="${p.image}" class="w-12 h-14 object-cover grayscale">
+                    <div class="text-xs font-grotesk">
+                        <p class="font-bold uppercase">${p.name}</p>
+                        <p class="text-neutral-500">${formatPrice(p.price)}</p>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function quickSearch(keyword) {
+            document.getElementById('global-search-input').value = keyword;
+            handleLiveSearch();
+            document.getElementById('shop-section').scrollIntoView();
+        }
+
+        function clearSearch() {
+            document.getElementById('global-search-input').value = '';
+            searchQuery = '';
+            document.getElementById('search-instant-results').innerHTML = '';
+            document.getElementById('search-bar-panel').classList.add('hidden');
+            renderProducts();
+        }
+
+        // 6. AUTHENTICATION (GOOGLE / FACEBOOK / EMAIL)
+        function handleUserClick() {
+            updateAuthModalView();
+            openModal('auth-modal');
+        }
+
+        function toggleAuthMode() {
+            isRegisterMode = !isRegisterMode;
+            document.getElementById('auth-title').innerText = isRegisterMode ? 'ĐĂNG KÝ THÀNH VIÊN' : 'ĐĂNG NHẬP TÀI KHOẢN';
+            document.getElementById('auth-submit-btn').innerText = isRegisterMode ? 'Tạo Tài Khoản Mới' : 'Đăng Nhập Ngay';
+            document.getElementById('auth-switch-Question').innerText = isRegisterMode ? 'Đã có tài khoản?' : 'Chưa có tài khoản?';
+            document.getElementById('auth-switch-btn').innerText = isRegisterMode ? 'Đăng nhập tại đây' : 'Đăng ký thành viên mới';
+            document.getElementById('register-name-field').classList.toggle('hidden', !isRegisterMode);
+        }
+
+        function socialLogin(provider) {
+            const demoName = provider === 'Google' ? 'Đức Nguyễn (Google)' : 'Đức Nguyễn (Facebook)';
+            const demoEmail = provider === 'Google' ? 'duc.nguyen@gmail.com' : 'duc.nguyen@facebook.com';
+            currentUser = { name: demoName, email: demoEmail, provider: `Đăng nhập qua ${provider}` };
+            localStorage.setItem('noir_user', JSON.stringify(currentUser));
+            updateUserToolbar();
+            updateAuthModalView();
+            showToast(`✓ Đã đăng nhập thành công bằng ${provider}!`);
+        }
+
+        function handleEmailAuth(e) {
+            e.preventDefault();
+            const email = document.getElementById('auth-email').value;
+            const nameInput = document.getElementById('auth-name').value;
+            const displayName = nameInput ? nameInput : email.split('@')[0].toUpperCase();
+            currentUser = { name: displayName, email: email, provider: 'Tài khoản Email' };
+            localStorage.setItem('noir_user', JSON.stringify(currentUser));
+            updateUserToolbar();
+            updateAuthModalView();
+            showToast(`✓ Chào mừng ${displayName} đến với NOIR STUDIO!`);
+        }
+
+        function logoutUser() {
+            currentUser = null;
+            localStorage.removeItem('noir_user');
+            updateUserToolbar();
+            updateAuthModalView();
+            showToast('Đã đăng xuất tài khoản.');
+        }
+
+        function updateUserToolbar() {
+            const txt = document.getElementById('user-status-text');
+            if (currentUser) {
+                txt.innerText = currentUser.name.split(' ')[0];
+            } else {
+                txt.innerText = 'Đăng nhập';
+            }
+        }
+
+        function updateAuthModalView() {
+            const guestView = document.getElementById('auth-guest-view');
+            const userView = document.getElementById('auth-user-view');
+            if (currentUser) {
+                guestView.classList.add('hidden');
+                userView.classList.remove('hidden');
+                document.getElementById('profile-name').innerText = currentUser.name;
+                document.getElementById('profile-email').innerText = currentUser.email;
+                document.getElementById('profile-provider').innerText = currentUser.provider;
+                document.getElementById('profile-avatar').innerText = currentUser.name.charAt(0).toUpperCase();
+                document.getElementById('profile-wishlist-num').innerText = wishlist.length;
+            } else {
+                guestView.classList.remove('hidden');
+                userView.classList.add('hidden');
+            }
+        }
+
+        // 7. PRODUCT MODAL & CART
+        function openProductDetail(id) {
+            activeModalProduct = products.find(p => p.id === id);
+            selectedColor = activeModalProduct.colors[0];
+            selectedSize = 'L';
+
+            document.getElementById('modal-img').src = activeModalProduct.image;
+            document.getElementById('modal-tag').innerText = activeModalProduct.tag;
+            document.getElementById('modal-name').innerText = activeModalProduct.name;
+            document.getElementById('modal-price').innerText = formatPrice(activeModalProduct.price);
+            document.getElementById('modal-desc').innerText = activeModalProduct.desc;
+            document.getElementById('modal-gsm').innerText = activeModalProduct.gsm;
+
+            renderModalSelectors();
+            openModal('product-modal');
+        }
+
+        function renderModalSelectors() {
+            document.getElementById('modal-color-label').innerText = selectedColor;
+            document.getElementById('modal-colors').innerHTML = activeModalProduct.colors.map(c => `
+                <button onclick="selectedColor='${c}'; renderModalSelectors()" 
+                        class="px-3.5 py-1.5 text-xs font-grotesk uppercase border border-black ${selectedColor === c ? 'bg-black text-white font-bold' : 'bg-white text-black'}">
+                    ${c}
+                </button>
+            `).join('');
+
+            ['S', 'M', 'L', 'XL'].forEach(s => {});
+            document.getElementById('modal-sizes').innerHTML = ['S', 'M', 'L', 'XL'].map(s => `
+                <button onclick="selectedSize='${s}'; renderModalSelectors()" 
+                        class="py-2.5 text-xs font-grotesk font-bold border border-black ${selectedSize === s ? 'bg-black text-white' : 'bg-white text-black'}">
+                    ${s}
+                </button>
+            `).join('');
+
+            document.getElementById('modal-add-cart').onclick = () => {
+                addToCart(activeModalProduct.id, selectedSize, selectedColor);
+                closeModal('product-modal');
+                toggleDrawer('cart-drawer');
+            };
+
+            const wishBtn = document.getElementById('modal-wishlist-btn');
+            const isLiked = wishlist.includes(activeModalProduct.id);
+            wishBtn.className = `w-12 border border-black flex items-center justify-center text-lg transition ${isLiked ? 'bg-black text-white' : 'bg-white text-black'}`;
+            wishBtn.onclick = () => {
+                toggleWishlist(activeModalProduct.id);
+                renderModalSelectors();
+            };
+        }
+
+        function addToCart(id, size, color) {
+            const p = products.find(item => item.id === id);
+            const existing = cart.find(item => item.id === id && item.size === size && item.color === color);
+            if (existing) {
+                existing.qty += 1;
+            } else {
+                cart.push({ id: p.id, name: p.name, price: p.price, image: p.image, size, color, qty: 1 });
+            }
+            localStorage.setItem('noir_cart', JSON.stringify(cart));
+            updateCartUI();
+            showToast(`Đã thêm "${p.name}" (Size ${size}) vào giỏ!`);
+        }
+
+        function updateCartUI() {
+            const totalQty = cart.reduce((s, i) => s + i.qty, 0);
+            document.getElementById('cart-count').innerText = totalQty;
+
+            const container = document.getElementById('cart-items');
+            if (cart.length === 0) {
+                container.innerHTML = `<div class="text-center py-16 text-xs font-grotesk uppercase text-neutral-400">Giỏ hàng đang trống.</div>`;
+            } else {
+                container.innerHTML = cart.map((item, idx) => `
+                    <div class="flex gap-3 border border-black p-3">
+                        <img src="${item.image}" class="w-16 h-20 object-cover grayscale border border-black">
+                        <div class="flex-1 text-xs font-grotesk">
+                            <h4 class="font-bold uppercase">${item.name}</h4>
+                            <p class="text-neutral-500 text-[11px]">Màu: ${item.color} | Size: ${item.size}</p>
+                            <p class="font-bold mt-1">${formatPrice(item.price)}</p>
+                            <div class="flex items-center gap-2 mt-2">
+                                <button onclick="changeCartQty(${idx}, -1)" class="w-6 h-6 border border-black">-</button>
+                                <span class="font-bold">${item.qty}</span>
+                                <button onclick="changeCartQty(${idx}, 1)" class="w-6 h-6 border border-black">+</button>
+                            </div>
+                        </div>
+                    </div>
+                `).join('');
+            }
+
+            const subtotal = cart.reduce((s, i) => s + i.price * i.qty, 0);
+            const discount = promoApplied ? Math.round(subtotal * 0.15) : 0;
+            document.getElementById('cart-subtotal').innerText = formatPrice(subtotal);
+            document.getElementById('cart-discount').innerText = '-' + formatPrice(discount);
+            document.getElementById('cart-total').innerText = formatPrice(subtotal - discount);
+            document.getElementById('cart-discount-row').classList.toggle('hidden', !promoApplied);
+        }
+
+        function changeCartQty(idx, delta) {
+            cart[idx].qty += delta;
+            if (cart[idx].qty <= 0) cart.splice(idx, 1);
+            localStorage.setItem('noir_cart', JSON.stringify(cart));
+            updateCartUI();
+        }
+
+        function applyPromo() {
+            const code = document.getElementById('promo-code').value.trim().toUpperCase();
+            if (code === 'NOIR15') {
+                promoApplied = true;
+                updateCartUI();
+                showToast('✓ Áp dụng mã NOIR15 giảm 15% thành công!');
+            } else {
+                showToast('✕ Mã không hợp lệ! Hãy nhập: NOIR15');
+            }
+        }
+
+        function handleCheckout() {
+            if (cart.length === 0) {
+                showToast('Giỏ hàng của bạn đang trống!');
+                return;
+            }
+            const buyer = currentUser ? currentUser.name : 'Khách hàng';
+            alert(`ĐẶT HÀNG THÀNH CÔNG!\n\nCảm ơn ${buyer} đã đặt mua tại NOIR STUDIO®.\nĐơn hàng sẽ được giao trong 2-3 ngày tới!`);
+            cart = [];
+            promoApplied = false;
+            localStorage.setItem('noir_cart', JSON.stringify(cart));
+            updateCartUI();
+            toggleDrawer('cart-drawer');
+        }
+
+        function subscribeNewsletter() {
+            const email = document.getElementById('newsletter-email').value;
+            if (!email) return showToast('Vui lòng nhập email của bạn!');
+            showToast('✓ Đã đăng ký nhận thông báo Drop mới!');
+            document.getElementById('newsletter-email').value = '';
+        }
+
+        // Helpers
+        function openModal(id) { document.getElementById(id).classList.remove('hidden'); }
+        function closeModal(id) { document.getElementById(id).classList.add('hidden'); }
+        function toggleDrawer(id) { document.getElementById(id).classList.toggle('hidden'); }
+        function toggleMobileMenu() { document.getElementById('mobile-menu').classList.toggle('hidden'); }
+
+        // Init
+        updateUserToolbar();
+        updateWishlistUI();
+        updateCartUI();
+        renderProducts();
+    </script>
+</body>
+</html>
