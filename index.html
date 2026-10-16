@@ -1,0 +1,1383 @@
+<!DOCTYPE html>
+<html lang="vi" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>L'ESSENTIEL ATELIER — Mỹ Phẩm Cao Cấp & Thời Trang Tối Giản</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts: Cormorant Garamond (Luxury Serif) & Plus Jakarta Sans (Clean Minimal Sans) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&family=Plus+Jakarta+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        alabaster: '#FAF9F6',
+                        pearl: '#F3F1EC',
+                        charcoal: '#1A1A1A',
+                        graphite: '#4A4A48',
+                        taupe: '#8C857B',
+                        champagne: '#C5A059',
+                        champagneLight: '#E5D3B3',
+                        sand: '#E6E2DD'
+                    },
+                    fontFamily: {
+                        serif: ['"Cormorant Garamond"', 'serif'],
+                        sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        body {
+            background-color: #FAF9F6;
+            color: #1A1A1A;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            overflow-x: hidden;
+        }
+        h1, h2, h3, h4, .font-editorial {
+            font-family: 'Cormorant Garamond', serif;
+        }
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 6px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #FAF9F6;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #D5D0C8;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #C5A059;
+        }
+        /* Subtle image zoom effect */
+        .img-zoom-container {
+            overflow: hidden;
+        }
+        .img-zoom {
+            transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .group:hover .img-zoom {
+            transform: scale(1.06);
+        }
+        /* Smooth Drawer Transition */
+        .drawer-backdrop {
+            background-color: rgba(26, 26, 26, 0.45);
+            backdrop-filter: blur(3px);
+        }
+    </style>
+</head>
+<body class="antialiased selection:bg-champagne selection:text-white">
+
+    <!-- Top Announcement Bar -->
+    <div class="bg-charcoal text-alabaster text-xs tracking-[0.2em] uppercase py-2.5 px-4 text-center font-light">
+        <span>Miễn phí vận chuyển toàn quốc cho mọi đơn hàng từ 2.000.000₫ | Nhập mã <strong class="text-champagne font-medium">LUXURY10</strong> giảm 10%</span>
+    </div>
+
+    <!-- Header / Navigation -->
+    <header id="navbar" class="sticky top-0 z-40 bg-alabaster/95 backdrop-blur-md border-b border-sand transition-all duration-300">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-20">
+                <!-- Mobile Menu Button -->
+                <div class="flex items-center lg:hidden">
+                    <button onclick="toggleMobileMenu()" class="p-2 text-charcoal hover:text-champagne transition-colors" aria-label="Menu">
+                        <i data-lucide="menu" class="w-6 h-6"></i>
+                    </button>
+                </div>
+
+                <!-- Left Navigation Links (Desktop) -->
+                <nav class="hidden lg:flex space-x-8 items-center text-xs tracking-[0.15em] uppercase font-medium text-graphite">
+                    <button onclick="filterByCategory('all')" class="nav-link hover:text-charcoal transition-colors py-1 border-b-2 border-transparent hover:border-champagne">Tất Cả</button>
+                    <button onclick="filterByCategory('cosmetics')" class="nav-link hover:text-charcoal transition-colors py-1 border-b-2 border-transparent hover:border-champagne">Mỹ Phẩm Luxury</button>
+                    <button onclick="filterByCategory('fashion')" class="nav-link hover:text-charcoal transition-colors py-1 border-b-2 border-transparent hover:border-champagne">Thời Trang Minimal</button>
+                    <a href="#lookbook" class="hover:text-charcoal transition-colors py-1 border-b-2 border-transparent hover:border-champagne">Lookbook</a>
+                    <a href="#story" class="hover:text-charcoal transition-colors py-1 border-b-2 border-transparent hover:border-champagne">Triết Lý</a>
+                </nav>
+
+                <!-- Brand Logo -->
+                <div class="flex-shrink-0 flex items-center justify-center">
+                    <a href="#" onclick="filterByCategory('all')" class="text-center group">
+                        <span class="font-editorial text-2xl sm:text-3xl tracking-[0.22em] font-semibold text-charcoal block">L'ESSENTIEL</span>
+                        <span class="text-[9px] tracking-[0.35em] uppercase text-taupe block -mt-1 group-hover:text-champagne transition-colors">Paris • Hanoi • Atelier</span>
+                    </a>
+                </div>
+
+                <!-- Right Icons: Search, Wishlist, Cart -->
+                <div class="flex items-center space-x-3 sm:space-x-5">
+                    <!-- Search Toggle -->
+                    <div class="relative flex items-center">
+                        <input id="searchInput" type="text" placeholder="Tìm kiếm..." 
+                            oninput="handleSearch(this.value)"
+                            class="hidden sm:block w-36 lg:w-48 bg-pearl/70 border border-sand rounded-full px-3.5 py-1.5 text-xs text-charcoal placeholder-taupe focus:outline-none focus:border-champagne transition-all">
+                        <button onclick="toggleMobileSearch()" class="sm:hidden p-2 text-charcoal hover:text-champagne transition-colors" aria-label="Tìm kiếm">
+                            <i data-lucide="search" class="w-5 h-5"></i>
+                        </button>
+                    </div>
+
+                    <!-- Wishlist Button -->
+                    <button onclick="toggleWishlistModal()" class="relative p-2 text-charcoal hover:text-champagne transition-colors" aria-label="Yêu thích">
+                        <i data-lucide="heart" class="w-5 h-5"></i>
+                        <span id="wishlistBadge" class="hidden absolute top-1 right-1 bg-champagne text-white text-[10px] w-4 h-4 rounded-full flex items-center justify-center font-medium">0</span>
+                    </button>
+
+                    <!-- Cart Button -->
+                    <button onclick="toggleCartDrawer(true)" class="relative p-2 text-charcoal hover:text-champagne transition-colors flex items-center gap-1.5" aria-label="Giỏ hàng">
+                        <i data-lucide="shopping-bag" class="w-5 h-5"></i>
+                        <span id="cartBadge" class="bg-charcoal text-alabaster text-[10px] w-4 h-4 rounded-full flex items-center justify-center font-medium">0</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Mobile Search Bar -->
+            <div id="mobileSearchBar" class="hidden sm:hidden pb-3">
+                <input id="mobileSearchInput" type="text" placeholder="Tìm sản phẩm (Serum, Blazer, Nước hoa...)" 
+                    oninput="handleSearch(this.value)"
+                    class="w-full bg-pearl border border-sand rounded-full px-4 py-2 text-xs text-charcoal placeholder-taupe focus:outline-none focus:border-champagne">
+            </div>
+        </div>
+
+        <!-- Mobile Menu Drawer -->
+        <div id="mobileMenu" class="hidden lg:hidden bg-alabaster border-b border-sand px-6 py-6 space-y-4">
+            <div class="flex flex-col space-y-3 text-sm tracking-[0.15em] uppercase font-medium text-charcoal">
+                <button onclick="filterByCategory('all'); toggleMobileMenu()" class="text-left py-1.5 border-b border-sand/60">Tất Cả Sản Phẩm</button>
+                <button onclick="filterByCategory('cosmetics'); toggleMobileMenu()" class="text-left py-1.5 border-b border-sand/60">Mỹ Phẩm Luxury</button>
+                <button onclick="filterByCategory('fashion'); toggleMobileMenu()" class="text-left py-1.5 border-b border-sand/60">Thời Trang Minimal</button>
+                <a href="#lookbook" onclick="toggleMobileMenu()" class="py-1.5 border-b border-sand/60">Editorial Lookbook</a>
+                <a href="#story" onclick="toggleMobileMenu()" class="py-1.5">Câu Chuyện Thương Hiệu</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Editorial Split Hero Section -->
+    <section class="relative overflow-hidden border-b border-sand">
+        <div class="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 min-h-[600px] lg:min-h-[720px]">
+            <!-- Left Editorial Text -->
+            <div class="lg:col-span-5 flex flex-col justify-center px-6 sm:px-12 lg:px-14 py-14 lg:py-20 bg-alabaster z-10">
+                <span class="text-xs tracking-[0.3em] uppercase text-champagne font-semibold mb-4 block">Autumn / Winter 2026 Collection</span>
+                <h1 class="font-editorial text-4xl sm:text-5xl lg:text-6xl font-normal text-charcoal leading-[1.12] mb-6">
+                    Vẻ Đẹp Thuần Khiết &amp; <span class="italic font-light">Sự Tối Giản</span> Đương Đại.
+                </h1>
+                <p class="text-graphite text-sm sm:text-base font-light leading-relaxed mb-8">
+                    Sự giao thoa hoàn mỹ giữa liệu pháp dưỡng da sinh học cao cấp và những thiết kế trang phục tối giản vượt thời gian. Đánh thức khí chất thanh lịch tự nhiên của riêng bạn.
+                </p>
+                <div class="flex flex-wrap gap-4">
+                    <button onclick="filterByCategory('cosmetics')" class="bg-charcoal text-alabaster px-7 py-3.5 text-xs tracking-[0.2em] uppercase hover:bg-champagne transition-colors duration-300 rounded-sm">
+                        Khám Phá Mỹ Phẩm
+                    </button>
+                    <button onclick="filterByCategory('fashion')" class="border border-charcoal text-charcoal px-7 py-3.5 text-xs tracking-[0.2em] uppercase hover:bg-charcoal hover:text-alabaster transition-colors duration-300 rounded-sm">
+                        Thời Trang Minimal
+                    </button>
+                </div>
+
+                <!-- Brand Pillars -->
+                <div class="grid grid-cols-3 gap-4 mt-12 pt-8 border-t border-sand">
+                    <div>
+                        <p class="font-editorial text-xl font-semibold text-charcoal">100% Thuần Chay</p>
+                        <p class="text-[11px] text-taupe mt-0.5">Chiết xuất hữu cơ quý hiếm</p>
+                    </div>
+                    <div>
+                        <p class="font-editorial text-xl font-semibold text-charcoal">Lụa &amp; Cashmere</p>
+                        <p class="text-[11px] text-taupe mt-0.5">Chất liệu tự nhiên bền vững</p>
+                    </div>
+                    <div>
+                        <p class="font-editorial text-xl font-semibold text-charcoal">Độc Bản</p>
+                        <p class="text-[11px] text-taupe mt-0.5">Chế tác thủ công tinh xảo</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right Dual Visual Banner -->
+            <div class="lg:col-span-7 grid grid-cols-1 sm:grid-cols-2 bg-pearl">
+                <!-- Luxury Cosmetics Visual -->
+                <div class="relative group overflow-hidden min-h-[340px] sm:min-h-full">
+                    <img src="https://images.unsplash.com/photo-1620916566398-39f1143ab7be?auto=format&fit=crop&w=1000&q=85" 
+                         alt="Luxury Skincare" 
+                         onerror="this.src='https://placehold.co/800x1000/EAE6DF/1A1A1A?text=Luxury+Cosmetics'"
+                         class="w-full h-full object-cover img-zoom">
+                    <div class="absolute inset-0 bg-gradient-to-t from-charcoal/60 via-transparent to-transparent flex flex-col justify-end p-8">
+                        <span class="text-[10px] tracking-[0.25em] uppercase text-champagneLight mb-1">Le Soin Botanique</span>
+                        <h3 class="font-editorial text-2xl text-white mb-2">Mỹ Phẩm Cao Cấp</h3>
+                        <button onclick="filterByCategory('cosmetics')" class="text-left text-xs text-white/90 underline underline-offset-4 tracking-widest uppercase hover:text-champagneLight">
+                            Xem bộ sưu tập →
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Minimalist Fashion Visual -->
+                <div class="relative group overflow-hidden min-h-[340px] sm:min-h-full border-l border-sand/30">
+                    <img src="https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?auto=format&fit=crop&w=1000&q=85" 
+                         alt="Minimalist Fashion" 
+                         onerror="this.src='https://placehold.co/800x1000/E5E0D8/1A1A1A?text=Minimalist+Fashion'"
+                         class="w-full h-full object-cover img-zoom">
+                    <div class="absolute inset-0 bg-gradient-to-t from-charcoal/60 via-transparent to-transparent flex flex-col justify-end p-8">
+                        <span class="text-[10px] tracking-[0.25em] uppercase text-champagneLight mb-1">La Silhouette Pure</span>
+                        <h3 class="font-editorial text-2xl text-white mb-2">Thời Trang Tối Giản</h3>
+                        <button onclick="filterByCategory('fashion')" class="text-left text-xs text-white/90 underline underline-offset-4 tracking-widest uppercase hover:text-champagneLight">
+                            Xem bộ sưu tập →
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Main Catalog & Filtering Section -->
+    <section id="catalogSection" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-24">
+        <!-- Section Header -->
+        <div class="flex flex-col md:flex-row md:items-end justify-between mb-10 pb-6 border-b border-sand">
+            <div>
+                <span class="text-xs tracking-[0.25em] uppercase text-champagne font-medium block mb-2">Curated Selection</span>
+                <h2 id="catalogTitle" class="font-editorial text-3xl sm:text-4xl text-charcoal">Tất Cả Tuyệt Tác</h2>
+            </div>
+            <p id="productCountText" class="text-xs tracking-widest uppercase text-taupe mt-2 md:mt-0">Hiển thị 12 sản phẩm</p>
+        </div>
+
+        <!-- Filter & Sort Bar -->
+        <div class="flex flex-col lg:flex-row lg:items-center justify-between gap-4 mb-12 bg-pearl/60 p-4 rounded-sm border border-sand">
+            <!-- Category Pills -->
+            <div class="flex flex-wrap items-center gap-2">
+                <button onclick="setCategoryFilter('all')" id="cat-all" class="cat-btn bg-charcoal text-alabaster px-4 py-2 text-xs tracking-[0.15em] uppercase rounded-sm transition-all">
+                    Tất Cả (12)
+                </button>
+                <button onclick="setCategoryFilter('cosmetics')" id="cat-cosmetics" class="cat-btn bg-transparent text-graphite hover:text-charcoal px-4 py-2 text-xs tracking-[0.15em] uppercase rounded-sm border border-sand transition-all">
+                    Mỹ Phẩm Luxury (6)
+                </button>
+                <button onclick="setCategoryFilter('fashion')" id="cat-fashion" class="cat-btn bg-transparent text-graphite hover:text-charcoal px-4 py-2 text-xs tracking-[0.15em] uppercase rounded-sm border border-sand transition-all">
+                    Quần Áo Minimal (6)
+                </button>
+            </div>
+
+            <!-- Price & Sort Dropdowns -->
+            <div class="flex flex-wrap items-center gap-3 sm:gap-4">
+                <!-- Price Filter -->
+                <div class="flex items-center gap-2">
+                    <label for="priceFilter" class="text-xs uppercase tracking-wider text-taupe">Mức giá:</label>
+                    <select id="priceFilter" onchange="applyFilters()" class="bg-alabaster border border-sand text-charcoal text-xs px-3 py-2 rounded-sm focus:outline-none focus:border-champagne">
+                        <option value="all">Tất cả mức giá</option>
+                        <option value="under2m">Dưới 2.000.000₫</option>
+                        <option value="2mto4m">2.000.000₫ - 4.000.000₫</option>
+                        <option value="above4m">Trên 4.000.000₫</option>
+                    </select>
+                </div>
+
+                <!-- Sort Order -->
+                <div class="flex items-center gap-2">
+                    <label for="sortFilter" class="text-xs uppercase tracking-wider text-taupe">Sắp xếp:</label>
+                    <select id="sortFilter" onchange="applyFilters()" class="bg-alabaster border border-sand text-charcoal text-xs px-3 py-2 rounded-sm focus:outline-none focus:border-champagne">
+                        <option value="featured">Nổi bật nhất</option>
+                        <option value="newest">Mới ra mắt</option>
+                        <option value="priceAsc">Giá: Thấp đến Cao</option>
+                        <option value="priceDesc">Giá: Cao đến Thấp</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+
+        <!-- Product Grid -->
+        <div id="productGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-x-6 gap-y-12">
+            <!-- Populated dynamically via JS -->
+        </div>
+
+        <!-- Empty State -->
+        <div id="emptyState" class="hidden text-center py-20">
+            <i data-lucide="sparkles" class="w-10 h-10 text-champagne mx-auto mb-3 stroke-1"></i>
+            <h3 class="font-editorial text-2xl text-charcoal mb-2">Không tìm thấy sản phẩm phù hợp</h3>
+            <p class="text-xs text-taupe mb-6">Vui lòng thử lại với từ khóa hoặc bộ lọc mức giá khác.</p>
+            <button onclick="resetFilters()" class="bg-charcoal text-alabaster px-6 py-2.5 text-xs tracking-widest uppercase rounded-sm hover:bg-champagne transition-colors">
+                Xóa bộ lọc
+            </button>
+        </div>
+    </section>
+
+    <!-- Editorial Lookbook / Bundle Banner -->
+    <section id="lookbook" class="bg-pearl border-y border-sand py-20">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
+                <div class="lg:col-span-7 grid grid-cols-2 gap-4">
+                    <div class="img-zoom-container rounded-sm overflow-hidden aspect-[3/4]">
+                        <img src="https://images.unsplash.com/photo-1509631179647-0177331693ae?auto=format&fit=crop&w=800&q=80" 
+                             alt="Minimalist Lookbook 1" 
+                             onerror="this.src='https://placehold.co/600x800/E5E0D8/1A1A1A?text=Lookbook+01'"
+                             class="w-full h-full object-cover img-zoom">
+                    </div>
+                    <div class="img-zoom-container rounded-sm overflow-hidden aspect-[3/4] mt-8">
+                        <img src="https://images.unsplash.com/photo-1596462502278-27bfdc403348?auto=format&fit=crop&w=800&q=80" 
+                             alt="Luxury Beauty Lookbook 2" 
+                             onerror="this.src='https://placehold.co/600x800/EAE6DF/1A1A1A?text=Lookbook+02'"
+                             class="w-full h-full object-cover img-zoom">
+                    </div>
+                </div>
+                <div class="lg:col-span-5 space-y-6">
+                    <span class="text-xs tracking-[0.25em] uppercase text-champagne font-medium">The Art of Ritual &amp; Silhouette</span>
+                    <h2 class="font-editorial text-3xl sm:text-4xl lg:text-5xl text-charcoal leading-tight">
+                        Khi Làn Da Tỏa Sáng Cùng Đường Cắt Tinh Giản
+                    </h2>
+                    <p class="text-graphite text-sm leading-relaxed font-light">
+                        Tại L'ESSENTIEL, chúng tôi tin rằng sự sang trọng đích thực không nằm ở sự phô trương. Đó là cảm giác mềm mại của chiếc đầm lụa Mulberry lướt trên làn da đã được nuôi dưỡng căng bóng bởi tinh chất vàng 24K và hoa trà trắng.
+                    </p>
+                    <div class="bg-alabaster p-5 border border-sand rounded-sm space-y-3">
+                        <p class="text-xs uppercase tracking-widest text-taupe">Gợi ý kết hợp hoàn hảo (The Signature Duo)</p>
+                        <div class="flex items-center justify-between">
+                            <div>
+                                <p class="font-editorial text-lg font-medium text-charcoal">Serum Vàng 24K + Áo Blazer Linen</p>
+                                <p class="text-xs text-graphite">Phong thái thanh lịch từ công sở đến tiệc tối</p>
+                            </div>
+                            <button onclick="openQuickView(1)" class="text-xs uppercase tracking-widest text-champagne hover:underline font-medium">
+                                Xem ngay →
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Brand Philosophy Section -->
+    <section id="story" class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-20 text-center">
+        <span class="text-xs tracking-[0.3em] uppercase text-champagne block mb-3">Triết Lý Của Chúng Tôi</span>
+        <h2 class="font-editorial text-3xl sm:text-5xl text-charcoal mb-6">"Ít Hơn Nhưng Tinh Tuyển Hơn"</h2>
+        <p class="text-graphite text-sm sm:text-base font-light leading-relaxed max-w-2xl mx-auto mb-12">
+            Mỗi lọ tinh chất đều được điều chế tại phòng lab chuẩn Thụy Sĩ và Pháp với nồng độ hoạt chất tinh khiết. Mỗi thiết kế trang phục đều được cắt may tỉ mỉ với số lượng giới hạn từ vải Linen hữu cơ, Lụa tơ tằm và Cashmere thượng hạng.
+        </p>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8 text-left border-t border-sand pt-12">
+            <div class="p-6 bg-pearl/40 border border-sand rounded-sm">
+                <i data-lucide="droplets" class="w-6 h-6 text-champagne mb-4 stroke-1"></i>
+                <h3 class="font-editorial text-xl text-charcoal mb-2">Khoa Học Làn Da Tinh Khiết</h3>
+                <p class="text-xs text-graphite leading-relaxed font-light">Không chứa Paraben, Sulfate hay hương liệu nhân tạo. Tập trung nuôi dưỡng hàng rào bảo vệ da tự nhiên.</p>
+            </div>
+            <div class="p-6 bg-pearl/40 border border-sand rounded-sm">
+                <i data-lucide="scissors" class="w-6 h-6 text-champagne mb-4 stroke-1"></i>
+                <h3 class="font-editorial text-xl text-charcoal mb-2">Kiến Trúc Phom Dáng Tối Giản</h3>
+                <p class="text-xs text-graphite leading-relaxed font-light">Bảng màu trung tính vượt thời gian (Ecru, Noir, Taupe, Sand) dễ dàng phối hợp trong mọi hoàn cảnh.</p>
+            </div>
+            <div class="p-6 bg-pearl/40 border border-sand rounded-sm">
+                <i data-lucide="package-check" class="w-6 h-6 text-champagne mb-4 stroke-1"></i>
+                <h3 class="font-editorial text-xl text-charcoal mb-2">Trải Nghiệm Đóng Gói Couture</h3>
+                <p class="text-xs text-graphite leading-relaxed font-light">Mỗi đơn hàng đều được gói trong hộp cứng ép kim, kèm túi vải linen và mẫu thử nước hoa độc quyền.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-charcoal text-alabaster pt-16 pb-12 border-t border-sand">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-10 pb-12 border-b border-white/10">
+                <div class="md:col-span-1 space-y-4">
+                    <span class="font-editorial text-2xl tracking-[0.22em] text-white block">L'ESSENTIEL</span>
+                    <p class="text-xs text-taupe leading-relaxed font-light">
+                        Ngôi nhà của mỹ phẩm sinh học cao cấp và thời trang tối giản đương đại.
+                    </p>
+                    <p class="text-xs text-champagneLight">Flagship Boutique: 48 Tràng Tiền, Hoàn Kiếm, Hà Nội</p>
+                </div>
+
+                <div>
+                    <h4 class="text-xs tracking-[0.2em] uppercase text-champagne mb-4">Bộ Sưu Tập</h4>
+                    <ul class="space-y-2.5 text-xs text-alabaster/80 font-light">
+                        <li><button onclick="filterByCategory('cosmetics')" class="hover:text-white transition-colors">Dưỡng Da Thượng Hạng</button></li>
+                        <li><button onclick="filterByCategory('cosmetics')" class="hover:text-white transition-colors">Nước Hoa Niche &amp; Son Velvet</button></li>
+                        <li><button onclick="filterByCategory('fashion')" class="hover:text-white transition-colors">Áo Khoác &amp; Blazer Linen</button></li>
+                        <li><button onclick="filterByCategory('fashion')" class="hover:text-white transition-colors">Đầm Lụa Tơ Tằm &amp; Quần Âu</button></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h4 class="text-xs tracking-[0.2em] uppercase text-champagne mb-4">Dịch Vụ Khách Hàng</h4>
+                    <ul class="space-y-2.5 text-xs text-alabaster/80 font-light">
+                        <li><a href="#story" class="hover:text-white transition-colors">Tư Vấn Da &amp; Phom Dáng 1:1</a></li>
+                        <li><a href="#catalogSection" class="hover:text-white transition-colors">Chính Sách Đổi Trả 30 Ngày</a></li>
+                        <li><a href="#catalogSection" class="hover:text-white transition-colors">Đặc Quyền Thành Viên VIP</a></li>
+                        <li><a href="#catalogSection" class="hover:text-white transition-colors">Hotline: 1800 6886 (Miễn phí)</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h4 class="text-xs tracking-[0.2em] uppercase text-champagne mb-4">Bản Tin Private</h4>
+                    <p class="text-xs text-taupe font-light mb-3">Đăng ký để nhận lời mời sự kiện Private Sale và ưu đãi 10% cho đơn hàng đầu tiên.</p>
+                    <form onsubmit="handleNewsletter(event)" class="flex">
+                        <input type="email" required placeholder="Nhập email của bạn..." class="bg-white/10 text-white placeholder-taupe text-xs px-3.5 py-2.5 w-full focus:outline-none focus:border-champagne border border-white/15 rounded-l-sm">
+                        <button type="submit" class="bg-champagne text-charcoal px-4 py-2.5 text-xs uppercase tracking-widest font-medium hover:bg-champagneLight transition-colors rounded-r-sm">
+                            Gửi
+                        </button>
+                    </form>
+                </div>
+            </div>
+
+            <div class="pt-8 flex flex-col sm:flex-row items-center justify-between text-[11px] text-taupe">
+                <p>© 2026 L'ESSENTIEL ATELIER. All Rights Reserved.</p>
+                <div class="flex space-x-6 mt-4 sm:mt-0">
+                    <span>Instagram</span>
+                    <span>Pinterest</span>
+                    <span>Vogue Runway</span>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- ========================================== -->
+    <!-- PRODUCT QUICK VIEW / DETAIL MODAL          -->
+    <!-- ========================================== -->
+    <div id="quickViewModal" class="fixed inset-0 z-50 hidden flex items-center justify-center p-4 drawer-backdrop">
+        <div class="bg-alabaster border border-sand max-w-4xl w-full rounded-sm overflow-hidden shadow-2xl relative animate-fadeIn max-h-[90vh] overflow-y-auto">
+            <button onclick="closeQuickView()" class="absolute top-4 right-4 z-10 bg-alabaster/80 p-2 rounded-full text-charcoal hover:text-champagne transition-colors">
+                <i data-lucide="x" class="w-5 h-5"></i>
+            </button>
+            <div id="quickViewContent" class="grid grid-cols-1 md:grid-cols-2">
+                <!-- Populated dynamically via JS -->
+            </div>
+        </div>
+    </div>
+
+    <!-- ========================================== -->
+    <!-- SLIDE-OUT SHOPPING CART DRAWER             -->
+    <!-- ========================================== -->
+    <div id="cartDrawer" class="fixed inset-0 z-50 hidden">
+        <!-- Backdrop -->
+        <div onclick="toggleCartDrawer(false)" class="fixed inset-0 drawer-backdrop transition-opacity"></div>
+
+        <!-- Drawer Panel -->
+        <div class="fixed inset-y-0 right-0 max-w-md w-full bg-alabaster shadow-2xl border-l border-sand flex flex-col z-10">
+            <!-- Header -->
+            <div class="px-6 py-5 border-b border-sand flex items-center justify-between">
+                <div>
+                    <h3 class="font-editorial text-2xl text-charcoal">Giỏ Hàng Của Bạn</h3>
+                    <p id="cartDrawerSubtitle" class="text-xs text-taupe">Miễn phí gói quà Couture cho mọi đơn hàng</p>
+                </div>
+                <button onclick="toggleCartDrawer(false)" class="p-2 text-graphite hover:text-charcoal">
+                    <i data-lucide="x" class="w-5 h-5"></i>
+                </button>
+            </div>
+
+            <!-- Cart Items List -->
+            <div id="cartItemsContainer" class="flex-1 overflow-y-auto p-6 space-y-5">
+                <!-- Populated dynamically via JS -->
+            </div>
+
+            <!-- Promo Code & Summary Footer -->
+            <div id="cartFooter" class="p-6 bg-pearl/70 border-t border-sand space-y-4">
+                <!-- Promo Code Input -->
+                <div>
+                    <div class="flex gap-2">
+                        <input id="promoInput" type="text" placeholder="Mã ưu đãi (VD: LUXURY10)" 
+                            class="w-full bg-alabaster border border-sand px-3 py-2 text-xs text-charcoal uppercase placeholder-taupe focus:outline-none focus:border-champagne rounded-sm">
+                        <button onclick="applyPromoCode()" class="bg-charcoal text-alabaster px-4 py-2 text-xs uppercase tracking-widest hover:bg-champagne transition-colors rounded-sm shrink-0">
+                            Áp Dụng
+                        </button>
+                    </div>
+                    <p id="promoMessage" class="text-[11px] mt-1.5 hidden"></p>
+                </div>
+
+                <!-- Totals -->
+                <div class="space-y-1.5 text-xs border-t border-sand pt-3">
+                    <div class="flex justify-between text-graphite">
+                        <span>Tạm tính:</span>
+                        <span id="cartSubtotal">0₫</span>
+                    </div>
+                    <div id="discountRow" class="hidden justify-between text-champagne font-medium">
+                        <span>Giảm giá (LUXURY10 - 10%):</span>
+                        <span id="cartDiscount">-0₫</span>
+                    </div>
+                    <div class="flex justify-between text-graphite">
+                        <span>Vận chuyển tiêu chuẩn:</span>
+                        <span id="cartShipping">Miễn phí</span>
+                    </div>
+                    <div class="flex justify-between text-base font-medium text-charcoal pt-2 border-t border-sand">
+                        <span class="font-editorial text-xl">Tổng cộng:</span>
+                        <span id="cartTotal" class="font-semibold">0₫</span>
+                    </div>
+                </div>
+
+                <button onclick="openCheckoutModal()" class="w-full bg-charcoal text-alabaster py-3.5 text-xs tracking-[0.2em] uppercase hover:bg-champagne transition-colors duration-300 rounded-sm font-medium">
+                    Tiến Hành Thanh Toán
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- ========================================== -->
+    <!-- WISHLIST MODAL                             -->
+    <!-- ========================================== -->
+    <div id="wishlistModal" class="fixed inset-0 z-50 hidden flex items-center justify-center p-4 drawer-backdrop">
+        <div class="bg-alabaster border border-sand max-w-2xl w-full rounded-sm overflow-hidden shadow-2xl relative max-h-[85vh] flex flex-col">
+            <div class="px-6 py-5 border-b border-sand flex items-center justify-between">
+                <h3 class="font-editorial text-2xl text-charcoal">Danh Sách Yêu Thích</h3>
+                <button onclick="toggleWishlistModal()" class="p-2 text-graphite hover:text-charcoal">
+                    <i data-lucide="x" class="w-5 h-5"></i>
+                </button>
+            </div>
+            <div id="wishlistContainer" class="p-6 overflow-y-auto space-y-4 flex-1">
+                <!-- Populated via JS -->
+            </div>
+        </div>
+    </div>
+
+    <!-- ========================================== -->
+    <!-- CHECKOUT MODAL                             -->
+    <!-- ========================================== -->
+    <div id="checkoutModal" class="fixed inset-0 z-50 hidden flex items-center justify-center p-4 drawer-backdrop">
+        <div class="bg-alabaster border border-sand max-w-2xl w-full rounded-sm overflow-hidden shadow-2xl relative max-h-[92vh] overflow-y-auto">
+            <!-- Header -->
+            <div class="px-6 py-5 border-b border-sand flex items-center justify-between bg-pearl/50">
+                <div>
+                    <span class="text-[10px] tracking-[0.25em] uppercase text-champagne block">L'ESSENTIEL Concierge</span>
+                    <h3 class="font-editorial text-2xl text-charcoal">Hoàn Tất Đơn Hàng</h3>
+                </div>
+                <button onclick="closeCheckoutModal()" class="p-2 text-graphite hover:text-charcoal">
+                    <i data-lucide="x" class="w-5 h-5"></i>
+                </button>
+            </div>
+
+            <!-- Checkout Form -->
+            <form id="checkoutForm" onsubmit="submitOrder(event)" class="p-6 space-y-5">
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div>
+                        <label class="block text-xs uppercase tracking-wider text-graphite mb-1.5">Họ và tên người nhận *</label>
+                        <input type="text" id="custName" required placeholder="Nguyễn Minh Khuê" class="w-full bg-white border border-sand px-3.5 py-2.5 text-xs text-charcoal focus:outline-none focus:border-champagne rounded-sm">
+                    </div>
+                    <div>
+                        <label class="block text-xs uppercase tracking-wider text-graphite mb-1.5">Số điện thoại *</label>
+                        <input type="tel" id="custPhone" required placeholder="0901 234 567" class="w-full bg-white border border-sand px-3.5 py-2.5 text-xs text-charcoal focus:outline-none focus:border-champagne rounded-sm">
+                    </div>
+                </div>
+
+                <div>
+                    <label class="block text-xs uppercase tracking-wider text-graphite mb-1.5">Địa chỉ giao hàng chi tiết *</label>
+                    <input type="text" id="custAddress" required placeholder="Số nhà, Tên đường, Phường/Xã, Quận/Huyện, Tỉnh/Thành phố" class="w-full bg-white border border-sand px-3.5 py-2.5 text-xs text-charcoal focus:outline-none focus:border-champagne rounded-sm">
+                </div>
+
+                <div>
+                    <label class="block text-xs uppercase tracking-wider text-graphite mb-1.5">Lời nhắn trên thiệp viết tay (Tùy chọn)</label>
+                    <textarea id="custNote" rows="2" placeholder="Nhập lời chúc nếu bạn gửi tặng người thân..." class="w-full bg-white border border-sand px-3.5 py-2 text-xs text-charcoal focus:outline-none focus:border-champagne rounded-sm"></textarea>
+                </div>
+
+                <!-- Payment Method -->
+                <div>
+                    <label class="block text-xs uppercase tracking-wider text-graphite mb-2">Phương thức thanh toán *</label>
+                    <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+                        <label class="border border-sand p-3 rounded-sm flex items-center gap-2.5 cursor-pointer hover:border-champagne bg-white">
+                            <input type="radio" name="paymentMethod" value="COD" checked class="accent-charcoal">
+                            <span class="text-xs text-charcoal font-medium">Thanh toán khi nhận (COD)</span>
+                        </label>
+                        <label class="border border-sand p-3 rounded-sm flex items-center gap-2.5 cursor-pointer hover:border-champagne bg-white">
+                            <input type="radio" name="paymentMethod" value="BANK" class="accent-charcoal">
+                            <span class="text-xs text-charcoal font-medium">Chuyển khoản QR</span>
+                        </label>
+                        <label class="border border-sand p-3 rounded-sm flex items-center gap-2.5 cursor-pointer hover:border-champagne bg-white">
+                            <input type="radio" name="paymentMethod" value="CARD" class="accent-charcoal">
+                            <span class="text-xs text-charcoal font-medium">Thẻ Visa / Master</span>
+                        </label>
+                    </div>
+                </div>
+
+                <!-- Order Summary Box -->
+                <div class="bg-pearl/60 p-4 rounded-sm border border-sand flex items-center justify-between">
+                    <div>
+                        <p class="text-xs text-graphite">Tổng thanh toán:</p>
+                        <p id="checkoutFinalTotal" class="font-editorial text-2xl font-semibold text-charcoal">0₫</p>
+                    </div>
+                    <button type="submit" class="bg-charcoal text-alabaster px-8 py-3.5 text-xs tracking-[0.2em] uppercase hover:bg-champagne transition-colors rounded-sm font-medium">
+                        Xác Nhận Đặt Hàng
+                    </button>
+                </div>
+            </form>
+
+            <!-- Order Confirmation Screen (Hidden initially) -->
+            <div id="orderSuccessScreen" class="hidden p-10 text-center space-y-5">
+                <div class="w-14 h-14 rounded-full bg-champagne/20 text-champagne flex items-center justify-center mx-auto">
+                    <i data-lucide="check" class="w-7 h-7"></i>
+                </div>
+                <span class="text-xs tracking-[0.3em] uppercase text-champagne block">Merci Beaucoup</span>
+                <h3 class="font-editorial text-3xl text-charcoal">Đặt Hàng Thành Công!</h3>
+                <p id="orderSuccessText" class="text-xs text-graphite max-w-md mx-auto leading-relaxed"></p>
+                <div class="bg-pearl p-4 rounded-sm border border-sand max-w-md mx-auto text-left text-xs space-y-1 text-graphite">
+                    <p><strong>Mã đơn hàng:</strong> <span id="orderCodeDisplay" class="text-charcoal font-mono"></span></p>
+                    <p><strong>Quà tặng kèm:</strong> 01 Vial Nước hoa Santal &amp; Túi Linen L'ESSENTIEL</p>
+                </div>
+                <button onclick="finishOrder()" class="bg-charcoal text-alabaster px-8 py-3 text-xs tracking-[0.2em] uppercase hover:bg-champagne transition-colors rounded-sm">
+                    Tiếp Tục Mua Sắm
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Floating Toast Notification -->
+    <div id="toast" class="fixed bottom-6 right-6 z-50 hidden bg-charcoal text-alabaster px-5 py-3.5 rounded-sm shadow-xl border-l-4 border-champagne flex items-center gap-3 transition-all duration-300">
+        <i data-lucide="sparkles" class="w-4 h-4 text-champagne"></i>
+        <span id="toastMessage" class="text-xs tracking-wider">Đã thêm vào giỏ hàng</span>
+    </div>
+
+    <!-- Application Logic -->
+    <script>
+        // ==========================================
+        // 1. PRODUCT CATALOG DATA (12 Curated Items)
+        // ==========================================
+        const products = [
+            // --- LUXURY COSMETICS (6 items) ---
+            {
+                id: 1,
+                name: "Tinh Chất Vàng Sinh Học L'Or Blanc 24K",
+                subtitle: "Cellular Illuminating Elixir • 50ml",
+                category: "cosmetics",
+                categoryLabel: "Mỹ Phẩm Luxury",
+                price: 3450000,
+                isNew: true,
+                isBestSeller: true,
+                image: "https://images.unsplash.com/photo-1620916566398-39f1143ab7be?auto=format&fit=crop&w=800&q=85",
+                optionsLabel: "Dung tích",
+                options: ["30ml", "50ml (Tiêu chuẩn)", "100ml (Limited)"],
+                description: "Tinh chất tái tạo da tầng sâu kết hợp lá vàng 24K nguyên chất cùng chiết xuất hoa trà trắng vùng Grasse. Mang lại độ căng bóng tự nhiên và phục hồi cấu trúc collagen chỉ sau 14 đêm.",
+                ingredients: "Tinh chất Vàng 24K, Niacinamide 5%, Chiết xuất Hoa Trà Trắng, Hyaluronic Acid đa phân tử."
+            },
+            {
+                id: 2,
+                name: "Son Nhung Lì Rouge Velours Couture",
+                subtitle: "Matte Silk Lip Colour • 3.5g",
+                category: "cosmetics",
+                categoryLabel: "Mỹ Phẩm Luxury",
+                price: 1250000,
+                isNew: false,
+                isBestSeller: true,
+                image: "https://images.unsplash.com/photo-1586495777744-4413f21062fa?auto=format&fit=crop&w=800&q=85",
+                optionsLabel: "Màu sắc",
+                options: ["#01 Rose Nu (Hồng Đất)", "#02 Rouge Noir (Đỏ Rượu)", "#08 Ambre (Cam Trà)"],
+                description: "Chất son nhung mịn như lụa tơ tằm, lên màu chuẩn xác ngay từ lần chạm đầu tiên. Bổ sung dầu Jojoba và bơ hạt mỡ giúp đôi môi mềm mướt suốt 12 giờ.",
+                ingredients: "Tinh dầu hoa hồng Pháp, Sáp ong hữu cơ, Vitamin E nguyên chất, Bơ Murumuru."
+            },
+            {
+                id: 3,
+                name: "Nước Hoa Niche Santal & Iris Absolu",
+                subtitle: "Eau de Parfum Intense • 100ml",
+                category: "cosmetics",
+                categoryLabel: "Mỹ Phẩm Luxury",
+                price: 4800000,
+                isNew: true,
+                isBestSeller: true,
+                image: "https://images.unsplash.com/photo-1541643600914-78b084683601?auto=format&fit=crop&w=800&q=85",
+                optionsLabel: "Dung tích",
+                options: ["50ml", "100ml"],
+                description: "Bản giao hưởng trầm lắng của gỗ Đàn Hương Úc, rễ hoa Diên Vĩ vùng Florence và chút cay nhẹ từ Bạch Đậu Khấu. Mùi hương unisex thanh lịch, lưu hương 10-14 giờ.",
+                ingredients: "Gỗ đàn hương (Sandalwood), Hoa diên vĩ (Iris Pallida), Tuyết tùng, Xạ hương trắng."
+            },
+            {
+                id: 4,
+                name: "Kem Dưỡng Đêm Crème De Nuit Céleste",
+                subtitle: "Deep Recovery Night Balm • 60ml",
+                category: "cosmetics",
+                categoryLabel: "Mỹ Phẩm Luxury",
+                price: 3900000,
+                isNew: false,
+                isBestSeller: false,
+                image: "https://images.unsplash.com/photo-1608248597359-0e6d526a6c18?auto=format&fit=crop&w=800&q=85",
+                optionsLabel: "Phiên bản",
+                options: ["Chất kem Rich (Da khô)", "Chất Gel-Cream (Da hỗn hợp)"],
+                description: "Kem dưỡng khóa ẩm chuyên sâu ban đêm với phức hợp Peptide sinh học và chiết xuất Nấm Truffle trắng, đánh thức làn da rạng rỡ và săn chắc vào mỗi buổi sớm.",
+                ingredients: "Chiết xuất Nấm Truffle Trắng, Phức hợp 5 loại Ceramide, Bakuchiol tự nhiên."
+            },
+            {
+                id: 5,
+                name: "Phấn Nước Lụa Mỏng Cushion Lumière",
+                subtitle: "Radiant Skin Cushion SPF 50+ • 15g",
+                category: "cosmetics",
+                categoryLabel: "Mỹ Phẩm Luxury",
+                price: 1850000,
+                isNew: true,
+                isBestSeller: false,
+                image: "https://images.unsplash.com/photo-1596462502278-27bfdc403348?auto=format&fit=crop&w=800&q=85",
+                optionsLabel: "Tông màu",
+                options: ["10 Ivoire (Trắng Sáng)", "20 Beige Clair (Tự Nhiên)", "30 Miel (Da Ngăm)"],
+                description: "Lớp nền mỏng nhẹ tựa sương mai với hạt phấn ngọc trai siêu vi, che phủ khuyết điểm tinh tế mà không gây bí da. Kèm 1 lõi thay thế trong hộp.",
+                ingredients: "Bột ngọc trai tự nhiên, Tinh chất hoa sen trắng, Màng lọc chống nắng vật lý."
+            },
+            {
+                id: 6,
+                name: "Dầu Dưỡng Thể Thảo Mộc Huile Précieuse",
+                subtitle: "Botanical Dry Body & Hair Oil • 120ml",
+                category: "cosmetics",
+                categoryLabel: "Mỹ Phẩm Luxury",
+                price: 2150000,
+                isNew: false,
+                isBestSeller: false,
+                image: "https://images.unsplash.com/photo-1601049541289-9b1b7bbbfe19?auto=format&fit=crop&w=800&q=85",
+                optionsLabel: "Mùi hương",
+                options: ["Cam Bergamot & Tuyết Tùng", "Hoa Nhài Đêm & Hổ Phách"],
+                description: "Dầu khô đa năng thẩm thấu tức thì, nuôi dưỡng làn da cơ thể mềm mại như lụa mà không hề nhờn rít. Mang hương thơm thư giãn chuẩn Spa cao cấp.",
+                ingredients: "Dầu hạt Trà Xanh, Dầu Argan hữu cơ, Tinh dầu Cam Bergamot vùng Calabria."
+            },
+
+            // --- MINIMALIST FASHION / CLOTHING (6 items) ---
+            {
+                id: 7,
+                name: "Áo Khoác Blazer Linen Phom Rộng",
+                subtitle: "Oversized Belgian Linen Blazer • Ecru",
+                category: "fashion",
+                categoryLabel: "Thời Trang Minimal",
+                price: 3650000,
+                isNew: true,
+                isBestSeller: true,
+                image: "https://images.unsplash.com/photo-1591047139829-d91aecb6caea?auto=format&fit=crop&w=800&q=85",
+                optionsLabel: "Kích cỡ",
+                options: ["Size S", "Size M", "Size L"],
+                description: "Thiết kế Blazer phom suông phóng khoáng được cắt may từ 100% vải Linen Bỉ thượng hạng. Cầu vai đứng phom nhẹ nhàng cùng hàng cúc sừng tự nhiên tinh xảo.",
+                ingredients: "Chất liệu: 100% Organic Belgian Linen. Lớp lót: 100% Cupro thoáng khí."
+            },
+            {
+                id: 8,
+                name: "Đầm Lụa Tơ Tằm Mulberry Dáng Suông",
+                subtitle: "Pure Silk Bias-Cut Slip Dress • Champagne",
+                category: "fashion",
+                categoryLabel: "Thời Trang Minimal",
+                price: 4200000,
+                isNew: true,
+                isBestSeller: true,
+                image: "https://images.unsplash.com/photo-1539008835657-9e8e9680c956?auto=format&fit=crop&w=800&q=85",
+                optionsLabel: "Kích cỡ",
+                options: ["Size S", "Size M", "Size L"],
+                description: "Chiếc Slip Dress kinh điển cắt xéo canh vải (bias-cut) ôm rủ mềm mại theo đường cong cơ thể. Sử dụng lụa tơ tằm Mulberry 22 Momme dày dặn, óng ả.",
+                ingredients: "Chất liệu: 100% Lụa Tơ Tằm Mulberry hạng 6A (22 Momme). Giặt khô chuyên dụng."
+            },
+            {
+                id: 9,
+                name: "Quần Âu Ống Suông Xếp Ly Cao Cấp",
+                subtitle: "Tailored Wide-Leg Wool Trousers • Charcoal",
+                category: "fashion",
+                categoryLabel: "Thời Trang Minimal",
+                price: 2850000,
+                isNew: false,
+                isBestSeller: true,
+                image: "https://images.unsplash.com/photo-1594633312681-425c7b97ccd1?auto=format&fit=crop&w=800&q=85",
+                optionsLabel: "Kích cỡ",
+                options: ["Size S (Eo 64cm)", "Size M (Eo 68cm)", "Size L (Eo 72cm)"],
+                description: "Quần âu cạp cao với hai đường chiết ly sắc sảo giúp tôn dáng và kéo dài đôi chân. Chất vải pha len lông cừu mỏng nhẹ, chống nhăn tuyệt đối suốt ngày dài.",
+                ingredients: "Chất liệu: 70% Virgin Wool, 30% Tencel sinh học."
+            },
+            {
+                id: 10,
+                name: "Áo Sơ Mi Lụa Tối Giản Cổ Đức",
+                subtitle: "Relaxed Crepe De Chine Shirt • Alabaster",
+                category: "fashion",
+                categoryLabel: "Thời Trang Minimal",
+                price: 2450000,
+                isNew: false,
+                isBestSeller: false,
+                image: "https://images.unsplash.com/photo-1598554747436-c9293d6a588f?auto=format&fit=crop&w=800&q=85",
+                optionsLabel: "Kích cỡ",
+                options: ["Size S", "Size M", "Size L"],
+                description: "Áo sơ mi lụa Crepe bề mặt mờ sang trọng với thiết kế giấu cúc tối giản. Phù hợp diện cùng quần âu ống rộng hoặc chân váy midi thanh lịch.",
+                ingredients: "Chất liệu: 100% Lụa Crepe de Chine, khuy trai biển tự nhiên."
+            },
+            {
+                id: 11,
+                name: "Áo Khoác Trench Coat Pha Cashmere",
+                subtitle: "Minimalist Belted Trench Coat • Warm Taupe",
+                category: "fashion",
+                categoryLabel: "Thời Trang Minimal",
+                price: 6500000,
+                isNew: true,
+                isBestSeller: false,
+                image: "https://images.unsplash.com/photo-1544022613-e87ca75a784a?auto=format&fit=crop&w=800&q=85",
+                optionsLabel: "Kích cỡ",
+                options: ["Size S/M (Freesize)", "Size M/L (Oversized)"],
+                description: "Tuyệt tác mùa Thu Đông được khâu tay hai mặt vải (Double-faced) từ len Merino và Cashmere. Không đường may thừa, nhẹ nhàng nhưng giữ ấm hoàn hảo.",
+                ingredients: "Chất liệu: 85% Australian Merino Wool, 15% Inner Mongolia Cashmere."
+            },
+            {
+                id: 12,
+                name: "Áo Thun Dệt Kim Cổ Tròn Monochrome",
+                subtitle: "Fine-Knit Supima Cotton Tee • Noir",
+                category: "fashion",
+                categoryLabel: "Thời Trang Minimal",
+                price: 1450000,
+                isNew: false,
+                isBestSeller: false,
+                image: "https://images.unsplash.com/photo-1503342217505-b0a15ec3261c?auto=format&fit=crop&w=800&q=85",
+                optionsLabel: "Kích cỡ",
+                options: ["Size S", "Size M", "Size L"],
+                description: "Chiếc áo cơ bản không thể thiếu trong tủ đồ tối giản. Dệt kim mịn từ sợi bông Supima dài nhất thế giới, giữ phom cổ áo không bai dão sau nhiều lần giặt.",
+                ingredients: "Chất liệu: 100% American Supima Cotton dệt kim mật độ cao."
+            }
+        ];
+
+        // ==========================================
+        // 2. APPLICATION STATE
+        // ==========================================
+        let currentCategory = 'all';
+        let searchQuery = '';
+        let cart = [
+            // Pre-populate 1 luxury item so user immediately sees cart functionality
+            {
+                productId: 1,
+                option: "50ml (Tiêu chuẩn)",
+                quantity: 1
+            }
+        ];
+        let wishlist = [3, 7];
+        let discountPercent = 0;
+
+        // Helper: Format VND currency
+        function formatVND(amount) {
+            return amount.toLocaleString('vi-VN') + '₫';
+        }
+
+        // ==========================================
+        // 3. RENDER PRODUCT CATALOG
+        // ==========================================
+        function renderProducts() {
+            const grid = document.getElementById('productGrid');
+            const emptyState = document.getElementById('emptyState');
+            const countText = document.getElementById('productCountText');
+            const priceFilter = document.getElementById('priceFilter').value;
+            const sortFilter = document.getElementById('sortFilter').value;
+
+            let filtered = products.filter(p => {
+                // Category check
+                if (currentCategory !== 'all' && p.category !== currentCategory) return false;
+                // Search check
+                if (searchQuery.trim() !== '') {
+                    const q = searchQuery.toLowerCase();
+                    const matchName = p.name.toLowerCase().includes(q);
+                    const matchSub = p.subtitle.toLowerCase().includes(q);
+                    const matchCat = p.categoryLabel.toLowerCase().includes(q);
+                    if (!matchName && !matchSub && !matchCat) return false;
+                }
+                // Price check
+                if (priceFilter === 'under2m' && p.price >= 2000000) return false;
+                if (priceFilter === '2mto4m' && (p.price < 2000000 || p.price > 4000000)) return false;
+                if (priceFilter === 'above4m' && p.price <= 4000000) return false;
+                return true;
+            });
+
+            // Sorting
+            if (sortFilter === 'newest') {
+                filtered.sort((a, b) => (b.isNew ? 1 : 0) - (a.isNew ? 1 : 0));
+            } else if (sortFilter === 'priceAsc') {
+                filtered.sort((a, b) => a.price - b.price);
+            } else if (sortFilter === 'priceDesc') {
+                filtered.sort((a, b) => b.price - a.price);
+            } else {
+                filtered.sort((a, b) => (b.isBestSeller ? 1 : 0) - (a.isBestSeller ? 1 : 0));
+            }
+
+            countText.textContent = `Hiển thị ${filtered.length} sản phẩm`;
+
+            if (filtered.length === 0) {
+                grid.innerHTML = '';
+                emptyState.classList.remove('hidden');
+                return;
+            }
+
+            emptyState.classList.add('hidden');
+            grid.innerHTML = filtered.map(product => {
+                const isWishlisted = wishlist.includes(product.id);
+                return `
+                    <div class="group flex flex-col">
+                        <!-- Image Box -->
+                        <div class="relative aspect-[3/4] bg-pearl rounded-sm overflow-hidden mb-4 img-zoom-container border border-sand/60">
+                            <img src="${product.image}" 
+                                 alt="${product.name}" 
+                                 onerror="this.src='https://placehold.co/600x800/EAE6DF/1A1A1A?text=L+ESSENTIEL'"
+                                 onclick="openQuickView(${product.id})"
+                                 class="w-full h-full object-cover img-zoom cursor-pointer">
+                            
+                            <!-- Badges -->
+                            <div class="absolute top-3 left-3 flex flex-col gap-1.5">
+                                ${product.isNew ? '<span class="bg-charcoal text-alabaster text-[10px] tracking-[0.2em] uppercase px-2.5 py-1">Mới</span>' : ''}
+                                ${product.isBestSeller ? '<span class="bg-champagne text-white text-[10px] tracking-[0.18em] uppercase px-2.5 py-1">Best Seller</span>' : ''}
+                            </div>
+
+                            <!-- Wishlist Icon -->
+                            <button onclick="toggleWishlist(${product.id})" 
+                                    class="absolute top-3 right-3 w-8 h-8 rounded-full bg-alabaster/90 flex items-center justify-center text-charcoal hover:text-champagne transition-colors"
+                                    aria-label="Yêu thích">
+                                <i data-lucide="heart" class="w-4 h-4 ${isWishlisted ? 'fill-champagne text-champagne' : ''}"></i>
+                            </button>
+
+                            <!-- Hover Action Overlay -->
+                            <div class="absolute inset-x-3 bottom-3 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex gap-2">
+                                <button onclick="quickAddToCart(${product.id})" 
+                                        class="flex-1 bg-charcoal/95 text-alabaster py-2.5 text-[11px] tracking-[0.18em] uppercase hover:bg-champagne transition-colors rounded-sm">
+                                    + Thêm Giỏ Hàng
+                                </button>
+                                <button onclick="openQuickView(${product.id})" 
+                                        class="bg-alabaster/95 text-charcoal px-3 py-2.5 hover:bg-champagne hover:text-white transition-colors rounded-sm"
+                                        title="Xem chi tiết">
+                                    <i data-lucide="eye" class="w-4 h-4"></i>
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Product Meta -->
+                        <div class="flex-1 flex flex-col justify-between">
+                            <div>
+                                <div class="flex items-center justify-between text-[10px] tracking-[0.2em] uppercase text-taupe mb-1">
+                                    <span>${product.categoryLabel}</span>
+                                    <span>${product.options[0]}</span>
+                                </div>
+                                <h3 onclick="openQuickView(${product.id})" class="font-editorial text-xl text-charcoal group-hover:text-champagne transition-colors cursor-pointer leading-snug">
+                                    ${product.name}
+                                </h3>
+                                <p class="text-xs text-taupe font-light mt-0.5">${product.subtitle}</p>
+                            </div>
+                            <div class="mt-3 pt-2 border-t border-sand/60 flex items-center justify-between">
+                                <span class="text-sm font-medium text-charcoal">${formatVND(product.price)}</span>
+                                <button onclick="openQuickView(${product.id})" class="text-[11px] uppercase tracking-widest text-graphite hover:text-champagne underline underline-offset-4">
+                                    Chi tiết
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+
+            lucide.createIcons();
+        }
+
+        // ==========================================
+        // 4. FILTERING & SEARCH HANDLERS
+        // ==========================================
+        function setCategoryFilter(category) {
+            currentCategory = category;
+            // Update active button styles
+            document.querySelectorAll('.cat-btn').forEach(btn => {
+                btn.classList.remove('bg-charcoal', 'text-alabaster');
+                btn.classList.add('bg-transparent', 'text-graphite', 'border', 'border-sand');
+            });
+            const activeBtn = document.getElementById(`cat-${category}`);
+            if (activeBtn) {
+                activeBtn.classList.add('bg-charcoal', 'text-alabaster');
+                activeBtn.classList.remove('bg-transparent', 'text-graphite', 'border');
+            }
+
+            // Update Section Title
+            const titleEl = document.getElementById('catalogTitle');
+            if (category === 'cosmetics') titleEl.textContent = 'Mỹ Phẩm Sinh Học Cao Cấp';
+            else if (category === 'fashion') titleEl.textContent = 'Thời Trang Tối Giản Đương Đại';
+            else titleEl.textContent = 'Tất Cả Tuyệt Tác';
+
+            renderProducts();
+        }
+
+        function filterByCategory(category) {
+            setCategoryFilter(category);
+            document.getElementById('catalogSection').scrollIntoView({ behavior: 'smooth' });
+        }
+
+        function handleSearch(val) {
+            searchQuery = val;
+            renderProducts();
+        }
+
+        function applyFilters() {
+            renderProducts();
+        }
+
+        function resetFilters() {
+            searchQuery = '';
+            document.getElementById('searchInput').value = '';
+            const mobileInput = document.getElementById('mobileSearchInput');
+            if (mobileInput) mobileInput.value = '';
+            document.getElementById('priceFilter').value = 'all';
+            document.getElementById('sortFilter').value = 'featured';
+            setCategoryFilter('all');
+        }
+
+        // ==========================================
+        // 5. QUICK VIEW / PRODUCT DETAIL MODAL
+        // ==========================================
+        let selectedModalOption = '';
+        let selectedModalQty = 1;
+
+        function openQuickView(productId) {
+            const product = products.find(p => p.id === productId);
+            if (!product) return;
+
+            selectedModalOption = product.options[0];
+            selectedModalQty = 1;
+
+            const content = document.getElementById('quickViewContent');
+            content.innerHTML = `
+                <div class="bg-pearl aspect-[4/5] md:aspect-auto">
+                    <img src="${product.image}" alt="${product.name}" class="w-full h-full object-cover">
+                </div>
+                <div class="p-6 sm:p-10 flex flex-col justify-between space-y-6">
+                    <div>
+                        <span class="text-[10px] tracking-[0.25em] uppercase text-champagne font-semibold block mb-2">${product.categoryLabel}</span>
+                        <h2 class="font-editorial text-3xl text-charcoal leading-tight">${product.name}</h2>
+                        <p class="text-xs text-taupe mt-1 mb-4">${product.subtitle}</p>
+                        <p class="text-xl font-medium text-charcoal pb-4 border-b border-sand">${formatVND(product.price)}</p>
+                        
+                        <p class="text-xs text-graphite leading-relaxed font-light mt-4">
+                            ${product.description}
+                        </p>
+
+                        <div class="mt-4 p-3 bg-pearl/70 border border-sand rounded-sm">
+                            <p class="text-[11px] uppercase tracking-wider text-charcoal font-medium mb-1">Thành phần &amp; Chất liệu:</p>
+                            <p class="text-xs text-graphite font-light">${product.ingredients}</p>
+                        </div>
+
+                        <!-- Option Selector (Shade / Size / Volume) -->
+                        <div class="mt-5">
+                            <label class="block text-xs uppercase tracking-wider text-charcoal mb-2">${product.optionsLabel}:</label>
+                            <div class="flex flex-wrap gap-2" id="modalOptionGroup">
+                                ${product.options.map((opt, idx) => `
+                                    <button type="button" onclick="selectOption(this, '${opt}')" 
+                                        class="opt-btn px-3.5 py-2 text-xs rounded-sm border transition-all ${idx === 0 ? 'bg-charcoal text-alabaster border-charcoal' : 'bg-white text-graphite border-sand hover:border-charcoal'}">
+                                        ${opt}
+                                    </button>
+                                `).join('')}
+                            </div>
+                        </div>
+
+                        <!-- Quantity Selector -->
+                        <div class="mt-5 flex items-center gap-4">
+                            <span class="text-xs uppercase tracking-wider text-charcoal">Số lượng:</span>
+                            <div class="flex items-center border border-sand bg-white rounded-sm">
+                                <button type="button" onclick="changeModalQty(-1)" class="px-3 py-1.5 text-charcoal hover:bg-pearl">-</button>
+                                <span id="modalQtyDisplay" class="px-4 py-1.5 text-xs font-medium">1</span>
+                                <button type="button" onclick="changeModalQty(1)" class="px-3 py-1.5 text-charcoal hover:bg-pearl">+</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="pt-4 border-t border-sand flex gap-3">
+                        <button onclick="addFromModalToCart(${product.id})" class="flex-1 bg-charcoal text-alabaster py-3.5 text-xs tracking-[0.2em] uppercase hover:bg-champagne transition-colors rounded-sm font-medium">
+                            Thêm Vào Giỏ Hàng
+                        </button>
+                        <button onclick="toggleWishlist(${product.id}); openQuickView(${product.id})" class="px-4 py-3.5 border border-sand hover:border-champagne rounded-sm text-charcoal">
+                            <i data-lucide="heart" class="w-4 h-4 ${wishlist.includes(product.id) ? 'fill-champagne text-champagne' : ''}"></i>
+                        </button>
+                    </div>
+                </div>
+            `;
+
+            document.getElementById('quickViewModal').classList.remove('hidden');
+            lucide.createIcons();
+        }
+
+        function selectOption(btnEl, optionValue) {
+            selectedModalOption = optionValue;
+            document.querySelectorAll('#modalOptionGroup .opt-btn').forEach(b => {
+                b.classList.remove('bg-charcoal', 'text-alabaster', 'border-charcoal');
+                b.classList.add('bg-white', 'text-graphite', 'border-sand');
+            });
+            btnEl.classList.add('bg-charcoal', 'text-alabaster', 'border-charcoal');
+            btnEl.classList.remove('bg-white', 'text-graphite', 'border-sand');
+        }
+
+        function changeModalQty(delta) {
+            selectedModalQty = Math.max(1, selectedModalQty + delta);
+            document.getElementById('modalQtyDisplay').textContent = selectedModalQty;
+        }
+
+        function closeQuickView() {
+            document.getElementById('quickViewModal').classList.add('hidden');
+        }
+
+        function addFromModalToCart(productId) {
+            addToCart(productId, selectedModalOption, selectedModalQty);
+            closeQuickView();
+            toggleCartDrawer(true);
+        }
+
+        // ==========================================
+        // 6. SHOPPING CART & PROMO LOGIC
+        // ==========================================
+        function quickAddToCart(productId) {
+            const product = products.find(p => p.id === productId);
+            if (!product) return;
+            addToCart(productId, product.options[0], 1);
+        }
+
+        function addToCart(productId, option, quantity) {
+            const existing = cart.find(item => item.productId === productId && item.option === option);
+            if (existing) {
+                existing.quantity += quantity;
+            } else {
+                cart.push({ productId, option, quantity });
+            }
+            updateCartUI();
+            const product = products.find(p => p.id === productId);
+            showToast(`Đã thêm "${product.name}" vào giỏ hàng`);
+        }
+
+        function updateCartQuantity(index, delta) {
+            cart[index].quantity += delta;
+            if (cart[index].quantity <= 0) {
+                cart.splice(index, 1);
+            }
+            updateCartUI();
+        }
+
+        function removeCartItem(index) {
+            cart.splice(index, 1);
+            updateCartUI();
+        }
+
+        function applyPromoCode() {
+            const input = document.getElementById('promoInput').value.trim().toUpperCase();
+            const msg = document.getElementById('promoMessage');
+            msg.classList.remove('hidden');
+
+            if (input === 'LUXURY10') {
+                discountPercent = 10;
+                msg.textContent = '✓ Đã áp dụng mã LUXURY10: Giảm 10% tổng giá trị đơn hàng.';
+                msg.className = 'text-[11px] mt-1.5 text-emerald-700 font-medium';
+            } else {
+                discountPercent = 0;
+                msg.textContent = '✕ Mã ưu đãi không hợp lệ. Vui lòng thử mã LUXURY10.';
+                msg.className = 'text-[11px] mt-1.5 text-red-600';
+            }
+            updateCartUI();
+        }
+
+        function calculateCartTotals() {
+            let subtotal = 0;
+            let count = 0;
+            cart.forEach(item => {
+                const product = products.find(p => p.id === item.productId);
+                if (product) {
+                    subtotal += product.price * item.quantity;
+                    count += item.quantity;
+                }
+            });
+            const discountAmount = Math.round(subtotal * (discountPercent / 100));
+            const finalTotal = subtotal - discountAmount;
+            return { subtotal, discountAmount, finalTotal, count };
+        }
+
+        function updateCartUI() {
+            const { subtotal, discountAmount, finalTotal, count } = calculateCartTotals();
+            document.getElementById('cartBadge').textContent = count;
+
+            const container = document.getElementById('cartItemsContainer');
+            const footer = document.getElementById('cartFooter');
+
+            if (cart.length === 0) {
+                container.innerHTML = `
+                    <div class="text-center py-16 space-y-4">
+                        <i data-lucide="shopping-bag" class="w-10 h-10 text-taupe mx-auto stroke-1"></i>
+                        <p class="font-editorial text-2xl text-charcoal">Giỏ hàng của bạn đang trống</p>
+                        <p class="text-xs text-taupe font-light">Hãy khám phá các dòng mỹ phẩm sinh học và trang phục tối giản của chúng tôi.</p>
+                    </div>
+                `;
+                footer.classList.add('hidden');
+                lucide.createIcons();
+                return;
+            }
+
+            footer.classList.remove('hidden');
+            container.innerHTML = cart.map((item, idx) => {
+                const product = products.find(p => p.id === item.productId);
+                return `
+                    <div class="flex gap-4 pb-4 border-b border-sand">
+                        <img src="${product.image}" alt="${product.name}" class="w-20 h-24 object-cover rounded-sm bg-pearl shrink-0">
+                        <div class="flex-1 flex flex-col justify-between">
+                            <div>
+                                <div class="flex justify-between items-start gap-2">
+                                    <h4 class="font-editorial text-lg text-charcoal leading-snug">${product.name}</h4>
+                                    <button onclick="removeCartItem(${idx})" class="text-taupe hover:text-charcoal">
+                                        <i data-lucide="trash-2" class="w-3.5 h-3.5"></i>
+                                    </button>
+                                </div>
+                                <p class="text-[11px] text-taupe mt-0.5">Phân loại: ${item.option}</p>
+                            </div>
+                            <div class="flex items-center justify-between mt-2">
+                                <div class="flex items-center border border-sand bg-white rounded-sm">
+                                    <button onclick="updateCartQuantity(${idx}, -1)" class="px-2 py-0.5 text-xs text-charcoal hover:bg-pearl">-</button>
+                                    <span class="px-2.5 py-0.5 text-xs">${item.quantity}</span>
+                                    <button onclick="updateCartQuantity(${idx}, 1)" class="px-2 py-0.5 text-xs text-charcoal hover:bg-pearl">+</button>
+                                </div>
+                                <span class="text-xs font-medium text-charcoal">${formatVND(product.price * item.quantity)}</span>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+
+            document.getElementById('cartSubtotal').textContent = formatVND(subtotal);
+            const discountRow = document.getElementById('discountRow');
+            if (discountAmount > 0) {
+                discountRow.classList.remove('hidden');
+                discountRow.classList.add('flex');
+                document.getElementById('cartDiscount').textContent = '-' + formatVND(discountAmount);
+            } else {
+                discountRow.classList.add('hidden');
+                discountRow.classList.remove('flex');
+            }
+            document.getElementById('cartTotal').textContent = formatVND(finalTotal);
+            lucide.createIcons();
+        }
+
+        function toggleCartDrawer(open) {
+            const drawer = document.getElementById('cartDrawer');
+            if (open) {
+                updateCartUI();
+                drawer.classList.remove('hidden');
+            } else {
+                drawer.classList.add('hidden');
+            }
+        }
+
+        // ==========================================
+        // 7. WISHLIST FUNCTIONALITY
+        // ==========================================
+        function toggleWishlist(productId) {
+            const idx = wishlist.indexOf(productId);
+            if (idx > -1) {
+                wishlist.splice(idx, 1);
+                showToast('Đã xóa khỏi danh sách yêu thích');
+            } else {
+                wishlist.push(productId);
+                showToast('Đã lưu vào danh sách yêu thích');
+            }
+            updateWishlistBadge();
+            renderProducts();
+        }
+
+        function updateWishlistBadge() {
+            const badge = document.getElementById('wishlistBadge');
+            if (wishlist.length > 0) {
+                badge.textContent = wishlist.length;
+                badge.classList.remove('hidden');
+            } else {
+                badge.classList.add('hidden');
+            }
+        }
+
+        function toggleWishlistModal() {
+            const modal = document.getElementById('wishlistModal');
+            const isHidden = modal.classList.contains('hidden');
+            if (isHidden) {
+                renderWishlistItems();
+                modal.classList.remove('hidden');
+            } else {
+                modal.classList.add('hidden');
+            }
+        }
+
+        function renderWishlistItems() {
+            const container = document.getElementById('wishlistContainer');
+            if (wishlist.length === 0) {
+                container.innerHTML = `<p class="text-center text-xs text-taupe py-12">Danh sách yêu thích của bạn đang trống.</p>`;
+                return;
+            }
+            container.innerHTML = wishlist.map(id => {
+                const p = products.find(item => item.id === id);
+                return `
+                    <div class="flex items-center justify-between gap-4 border-b border-sand pb-4">
+                        <div class="flex items-center gap-4">
+                            <img src="${p.image}" alt="${p.name}" class="w-16 h-20 object-cover rounded-sm">
+                            <div>
+                                <span class="text-[10px] uppercase tracking-widest text-champagne">${p.categoryLabel}</span>
+                                <h4 class="font-editorial text-xl text-charcoal">${p.name}</h4>
+                                <p class="text-xs font-medium text-graphite">${formatVND(p.price)}</p>
+                            </div>
+                        </div>
+                        <div class="flex items-center gap-2">
+                            <button onclick="quickAddToCart(${p.id}); toggleWishlistModal();" class="bg-charcoal text-alabaster px-4 py-2 text-xs uppercase tracking-wider rounded-sm hover:bg-champagne transition-colors">
+                                Thêm Giỏ Hàng
+                            </button>
+                            <button onclick="toggleWishlist(${p.id}); renderWishlistItems();" class="p-2 text-taupe hover:text-charcoal">
+                                <i data-lucide="x" class="w-4 h-4"></i>
+                            </button>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+            lucide.createIcons();
+        }
+
+        // ==========================================
+        // 8. CHECKOUT FLOW
+        // ==========================================
+        function openCheckoutModal() {
+            toggleCartDrawer(false);
+            const { finalTotal } = calculateCartTotals();
+            document.getElementById('checkoutFinalTotal').textContent = formatVND(finalTotal);
+            document.getElementById('checkoutForm').classList.remove('hidden');
+            document.getElementById('orderSuccessScreen').classList.add('hidden');
+            document.getElementById('checkoutModal').classList.remove('hidden');
+        }
+
+        function closeCheckoutModal() {
+            document.getElementById('checkoutModal').classList.add('hidden');
+        }
+
+        function submitOrder(e) {
+            e.preventDefault();
+            const name = document.getElementById('custName').value;
+            const phone = document.getElementById('custPhone').value;
+            const address = document.getElementById('custAddress').value;
+            const { finalTotal } = calculateCartTotals();
+
+            const randomCode = 'LES-' + Math.floor(100000 + Math.random() * 900000);
+            document.getElementById('orderCodeDisplay').textContent = randomCode;
+            document.getElementById('orderSuccessText').innerHTML = `
+                Cảm ơn quý khách <strong>${name}</strong> (${phone}). Đơn hàng trị giá <strong>${formatVND(finalTotal)}</strong> sẽ được đóng gói Couture và giao đến địa chỉ: <em>${address}</em> trong 1-3 ngày làm việc.
+            `;
+
+            document.getElementById('checkoutForm').classList.add('hidden');
+            document.getElementById('orderSuccessScreen').classList.remove('hidden');
+
+            // Clear cart after successful order
+            cart = [];
+            discountPercent = 0;
+            updateCartUI();
+            lucide.createIcons();
+        }
+
+        function finishOrder() {
+            closeCheckoutModal();
+            document.getElementById('checkoutForm').reset();
+        }
+
+        // ==========================================
+        // 9. UI HELPERS (Toast, Mobile Menu, Newsletter)
+        // ==========================================
+        let toastTimeout;
+        function showToast(message) {
+            const toast = document.getElementById('toast');
+            document.getElementById('toastMessage').textContent = message;
+            toast.classList.remove('hidden');
+            clearTimeout(toastTimeout);
+            toastTimeout = setTimeout(() => {
+                toast.classList.add('hidden');
+            }, 3000);
+        }
+
+        function toggleMobileMenu() {
+            const menu = document.getElementById('mobileMenu');
+            menu.classList.toggle('hidden');
+        }
+
+        function toggleMobileSearch() {
+            const bar = document.getElementById('mobileSearchBar');
+            bar.classList.toggle('hidden');
+            if (!bar.classList.contains('hidden')) {
+                document.getElementById('mobileSearchInput').focus();
+            }
+        }
+
+        function handleNewsletter(e) {
+            e.preventDefault();
+            e.target.reset();
+            showToast('Chào mừng bạn đến với L\'ESSENTIEL Private Club!');
+        }
+
+        // Initialize on Page Load
+        window.addEventListener('DOMContentLoaded', () => {
+            renderProducts();
+            updateCartUI();
+            updateWishlistBadge();
+            lucide.createIcons();
+        });
+    </script>
+</body>
+</html>
